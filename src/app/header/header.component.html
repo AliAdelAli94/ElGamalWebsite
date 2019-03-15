@@ -1,0 +1,265 @@
+	<!-- Header -->
+  <header class="header header-2">
+
+    <!-- Header Top Area -->
+    <div class="header-top bg-theme">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+            <p class="header-welcomemsg">أهلا بكم <span>في متجر الجمل !</span></p>
+          </div>
+          <div class="col-lg-5 col-md-5 col-sm-5 col-12">
+            <div class="header-langcurr">
+              <div class="select-language">
+                <button class="select-language-current"><img src="assets/images/icons/eg.png"
+                    alt="us icon">العربية</button>
+                <ul class="select-language-list dropdown-list">
+                  <li><a href="#"><img src="assets/images/icons/eg.png" alt="eg icon">العربية</a></li>
+                  <li><a href="#"><img src="assets/images/icons/us.png" alt="us icon">English</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--// Header Top Area -->
+
+    <!-- Header Middle Area -->
+    <div class="header-middle bg-white">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-3 col-md-6 col-sm-6 order-1 order-lg-1">
+            <a href="index.html" class="header-logo">
+              <img src="assets/images/logo/logo.png" alt="logo">
+            </a>
+          </div>
+          <div class="col-lg-6 col-12 order-3 order-lg-2">
+            <form action="#" class="header-searchbox">
+              <select class="select-searchcategory">
+                <option value="0">اقسام الجمل</option>
+                <option value="1">اجهزة مراقبة </option>
+                <option value="2">اقراص صلبة </option>
+                <option value="3">اكسسوارت </option>
+                <option value="4">العاب</option>
+                <option value="5">تليفزيونات</option>
+                <option value="6">حقائب كمبيوتر </option>
+                <option value="7">ستلايت وريسيفر </option>
+                <option value="8">سماعات </option>
+                <option value="9">طابعات </option>
+                <option value="10">فلاش ميموري</option>
+                <option value="11">كاميرات واكسسوارات</option>
+                <option value="12">لاب توب</option>
+                <option value="13">ماسحات ضوئية </option>
+                <option value="14">ماوس و كيبورد</option>
+                <option value="15">مستلزمات شبكات </option>
+                <option value="16">موبايل وتابلت</option>
+                <option value="17">يو بى اس</option>
+                <option value="18">اجهزة كمبيوتر</option>
+              </select>
+              <input type="text" placeholder="إكتب كلمة البحث الخاصة بك ...">
+              <button type="submit"><i class="lnr lnr-magnifier"></i></button>
+            </form>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6 order-2 order-lg-3">
+            <div class="header-icons">
+              <div class="header-account">
+                <button class="header-accountbox-trigger"><span class="lnr lnr-user"></span> حسابي
+                  <i class="ion ion-ios-arrow-down"></i></button>
+                <ul class="header-accountbox dropdown-list">
+                  <li>
+                    <a [routerLink]="['/cart']">تعديل الحساب</a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/product-details']">المفضلة</a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/search-result']">طلباتي</a>
+                  </li>
+                  <li>
+                    <a [routerLink]="['/login-register']">تسجيل الدخول</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="header-cart">
+                <a class="header-carticon" href="cart.html"><i class="lnr lnr-cart"></i><span
+                    class="count">5</span></a>
+
+                <!-- Minicart -->
+                <div class="header-minicart minicart">
+                  <div class="minicart-header">
+                    <div class="minicart-product">
+                      <div class="minicart-productimage">
+                        <a href="product-details.html">
+                          <img src="assets/images/products/product1.jpg" alt="product image">
+                        </a>
+                        <span class="minicart-productquantity">3x</span>
+                      </div>
+                      <div class="minicart-productcontent">
+                        <h6><a href="product-details.html">طابعة ليزر كانون اي سينس الكل في
+                            واحد MF3010
+                            Roku Smart TV</a></h6>
+                        <span class="minicart-productprice">1000.00 ج.م</span>
+                      </div>
+                      <button class="minicart-productclose"><i
+                          class="ion ion-ios-close-circle"></i></button>
+                    </div>
+                    <div class="minicart-product">
+                      <div class="minicart-productimage">
+                        <a href="product-details.html">
+                          <img src="assets/images/products/product2.jpg" alt="product image">
+                        </a>
+                        <span class="minicart-productquantity">2x</span>
+                      </div>
+                      <div class="minicart-productcontent">
+                        <h6><a href="product-details.html">هواوي ميت10 لايت,شريحتين
+                            اتصال,تخزين حتي 64,رامات4,كاميراامامية16+2
+                            Camcorder</a></h6>
+                        <span class="minicart-productprice">500.00 ج.م</span>
+                      </div>
+                      <button class="minicart-productclose"><i
+                          class="ion ion-ios-close-circle"></i></button>
+                    </div>
+                  </div>
+                  <ul class="minicart-pricing">
+                    <li>قيمة المنتجات <span>1200.12 ج.م</span></li>
+                    <li>قيمة التوصيل <span>7.00 ج.م</span></li>
+                    <li>الضريبة المضافة <span>0.00 ج.م</span></li>
+                    <li>الإجمالي <span>31.12 ج.م</span></li>
+                  </ul>
+                  <div class="minicart-footer">
+                    <a href="cart.html" class="ho-button ho-button-fullwidth">
+                      <span>عربة التسوق</span>
+                    </a>
+                    <a href="checkout.html"
+                      class="ho-button ho-button-dark ho-button-fullwidth">
+                      <span>إستكمال الطلب</span>
+                    </a>
+                  </div>
+                </div>
+                <!--// Minicart -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--// Header Middle Area -->
+
+    <!-- Header Bottom Area -->
+    <div class="header-bottom bg-white">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-10 col-md-5 col-sm-5">
+
+            <!-- Category Menu -->
+            <div class="header-catmenu catmenu">
+              <button class="catmenu-trigger">
+                <span>أقسام الجمل</span>
+              </button>
+              <nav class="catmenu-body">
+                <ul>
+
+                  <li class="catmenu-dropdown" *ngFor="let category of categories"><a href="#"><i
+                        class="ion ion-ios-desktop"></i>{{category.name}}</a>
+                    <!-- <ul class="megamenu catmenu-megamenu">
+                      <li><a href="#">لابتوب</a>
+                        <ul>
+                          <li><a href="#">ديل</a></li>
+                          <li><a href="#">لينوفو</a></li>
+                          <li><a href="#">اتش بي</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="#">لابتوب</a>
+                        <ul>
+                          <li><a href="#">ديل</a></li>
+                          <li><a href="#">لينوفو</a></li>
+                          <li><a href="#">اتش بي</a></li>
+                        </ul>
+                      </li>
+                      <li><a href="#">لابتوب</a>
+                        <ul>
+                          <li><a href="#">ديل</a></li>
+                          <li><a href="#">لينوفو</a></li>
+                          <li><a href="#">اتش بي</a></li>
+                        </ul>
+                      </li>
+                    </ul> -->
+                  </li>
+
+                  <!-- <li><a href="#"><i class="ion ion-ios-desktop"></i>أجهزة كمبيوتر</a></li>
+                  <li><a href="#"><i class="ion ion-ios-desktop"></i>أجهزة كمبيوتر</a></li>
+                  <li><a href="#"><i class="ion ion-ios-desktop"></i>أجهزة كمبيوتر</a></li>
+                  <li><a href="#"><i class="ion ion-ios-desktop"></i>أجهزة كمبيوتر</a></li>
+                  <li><a href="#"><i class="ion ion-ios-desktop"></i>أجهزة كمبيوتر</a></li> -->
+
+
+                </ul>
+
+              </nav>
+            </div>
+            <!--// Category Menu -->
+
+            <!-- Navigation -->
+            <nav class="ho-navigation ho-navigation-2">
+              <ul>
+                <li class="active">
+                  <a [routerLink]="['/home']">الرئيسية</a>
+                </li>
+
+                <li>
+                  <a [routerLink]="['/order-details']">عروض الجمل</a>
+                </li>
+
+                <li>
+                  <a href="about-us.html">من نحن</a>
+                </li>
+
+                <li>
+                  <a href="#">أخبار الجمل</a>
+                </li>
+
+                <li>
+                  <a href="contact.html"> اتصل بنا</a>
+                </li>
+              </ul>
+            </nav>
+            <!--// Navigation -->
+
+          </div>
+          <div class="col-lg-2 col-md-5 col-sm-5">
+            <div class="header-contactinfo">
+              <i class="flaticon-support"></i>
+              <span>اتصل بنا الأن :</span>
+              <a href="tel:+01148444018">01148444018</a>
+            </div>
+          </div>
+          <div class="col-12 d-block d-lg-none">
+            <div class="mobile-menu clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--// Header Bottom Area -->
+
+    <!-- Header Hot Tags -->
+    <div class="header-tagsarea bg-grey">
+      <div class="container">
+        <div class="header-tags">
+          <h6>الأكثر شيوعا : </h6>
+          <ul>
+            <li><a href="#">لابتوب</a></li>
+            <li><a href="#">ساعات ذكية</a></li>
+            <li><a href="#">سماعات</a></li>
+            <li><a href="#">اكسسوارات</a></li>
+            <li><a href="#">هواتف و تابلت</a></li>
+            <li><a href="#">الكترونيات</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--// Header Hot Tags -->
+
+  </header>
+  <!--// Header -->
