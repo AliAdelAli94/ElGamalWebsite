@@ -160,43 +160,20 @@
               </button>
               <nav class="catmenu-body">
                 <ul>
-
-                  <li class="catmenu-dropdown" *ngFor="let category of categories"><a href="#"><i
-                        class="ion ion-ios-desktop"></i>{{category.name}}</a>
-                    <!-- <ul class="megamenu catmenu-megamenu">
-                      <li><a href="#">لابتوب</a>
+                  <li class="catmenu-dropdown" *ngFor="let x of categories"><a href="#"><i
+                        class="ion ion-ios-desktop"></i>{{x.name}}</a>
+                    <ul class="megamenu catmenu-megamenu">
+                      <li><a href="#" >الأقسام الفرعية</a>
                         <ul>
-                          <li><a href="#">ديل</a></li>
-                          <li><a href="#">لينوفو</a></li>
-                          <li><a href="#">اتش بي</a></li>
+                          <li><a *ngFor="let z of x.childCategories" href="#">{{z.name}}</a></li>
+                          <li *ngIf="!x.childCategories || x.childCategories.length==0">
+                            <h5>لا توجد أقسام فرعية</h5>
+                          </li>
                         </ul>
                       </li>
-                      <li><a href="#">لابتوب</a>
-                        <ul>
-                          <li><a href="#">ديل</a></li>
-                          <li><a href="#">لينوفو</a></li>
-                          <li><a href="#">اتش بي</a></li>
-                        </ul>
-                      </li>
-                      <li><a href="#">لابتوب</a>
-                        <ul>
-                          <li><a href="#">ديل</a></li>
-                          <li><a href="#">لينوفو</a></li>
-                          <li><a href="#">اتش بي</a></li>
-                        </ul>
-                      </li>
-                    </ul> -->
+                    </ul>
                   </li>
-
-                  <!-- <li><a href="#"><i class="ion ion-ios-desktop"></i>أجهزة كمبيوتر</a></li>
-                  <li><a href="#"><i class="ion ion-ios-desktop"></i>أجهزة كمبيوتر</a></li>
-                  <li><a href="#"><i class="ion ion-ios-desktop"></i>أجهزة كمبيوتر</a></li>
-                  <li><a href="#"><i class="ion ion-ios-desktop"></i>أجهزة كمبيوتر</a></li>
-                  <li><a href="#"><i class="ion ion-ios-desktop"></i>أجهزة كمبيوتر</a></li> -->
-
-
                 </ul>
-
               </nav>
             </div>
             <!--// Category Menu -->

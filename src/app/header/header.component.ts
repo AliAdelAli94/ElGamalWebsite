@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '../models/category.model';
+import { ParentCategoryDto } from '../models/ParentCategoryDto.model';
 import { DbManipulationService } from '../services/db-manipulation.service';
 
 @Component({
@@ -9,21 +9,20 @@ import { DbManipulationService } from '../services/db-manipulation.service';
 })
 export class HeaderComponent implements OnInit {
 
-  categories: Category[];
+  categories: ParentCategoryDto[];
 
   constructor( private dbManipulationService : DbManipulationService) { }
 
   ngOnInit() {
 
-    this.getAllCategories();
+    this.getparentCategories();
 
   }
 
-  getAllCategories(){
+  getparentCategories(){
 
-    this.dbManipulationService.getCategories().subscribe(response => {
+    this.dbManipulationService.getparentCategories().subscribe(response => {
       this.categories = response;
     });
   }
-
 }

@@ -203,52 +203,6 @@ function IntializeWebsiteJS(){
 		});
 
 
-		/* Deal Of The Day Slider 2 */
-		$('.deal-of-the-day-slider-2').slick({
-			slidesToShow: 4,
-			autoplay: true,
-			autoplaySpeed: 8000,
-			speed: 1000,
-			adaptiveHeight: true,
-			fade: false,
-			easing: 'ease-in-out',
-			dots: false,
-			arrows: true,
-			prevArrow: '<span class="slider-navigation-arrow slider-navigation-prev"><i class="ion ion-ios-arrow-forward"></i></span>',
-			nextArrow: '<span class="slider-navigation-arrow slider-navigation-next"><i class="ion ion-ios-arrow-back"></i></span>',
-			rtl: true,
-			responsive: [{
-				breakpoint: 1200,
-				settings: {
-					slidesToShow: 3,
-					slidesToScroll: 1
-				}
-			},
-			{
-				breakpoint: 992,
-				settings: {
-					slidesToShow: 2,
-					slidesToScroll: 1
-				}
-			},
-			{
-				breakpoint: 768,
-				settings: {
-					slidesToShow: 2,
-					slidesToScroll: 1
-				}
-			},
-			{
-				breakpoint: 576,
-				settings: {
-					slidesToShow: 1,
-					slidesToScroll: 1
-				}
-			}
-			]
-		});
-
-
 		/* Trending Product Slider */
 		$('.trending-products-slider').slick({
 			slidesToShow: 2,
@@ -992,4 +946,51 @@ function IntializeWebsiteJS(){
 
 
 
+	}
+	function OfferSliderJS()
+	{
+		/* Deal Of The Day Slider 2 */
+		$('.deal-of-the-day-slider-2').slick({
+			slidesToShow: 4,
+			autoplay: true,
+			autoplaySpeed: 8000,
+			speed: 1000,
+			adaptiveHeight: true,
+			fade: false,
+			easing: 'ease-in-out',
+			dots: false,
+			arrows: true,
+			prevArrow: '<span class="slider-navigation-arrow slider-navigation-prev"><i class="ion ion-ios-arrow-forward"></i></span>',
+			nextArrow: '<span class="slider-navigation-arrow slider-navigation-next"><i class="ion ion-ios-arrow-back"></i></span>',
+			rtl: true,
+			responsive: [{
+				breakpoint: 1200,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 1
+				}
+			},
+			{
+				breakpoint: 992,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 1
+				}
+			},
+			{
+				breakpoint: 768,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 1
+				}
+			},
+			{
+				breakpoint: 576,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1
+				}
+			}
+			]
+		});
 	}
