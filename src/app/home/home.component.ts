@@ -18,18 +18,17 @@ export class HomeComponent implements AfterViewInit {
   ngOnInit() {
 
     this.getProductOfferDTO();
-
+    
   }
   getProductOfferDTO(){
 
     this.dbManipulationService.getProductOfferDTO().subscribe(response => {
-      this.offers = response;
-      OfferSliderJS();
+      this.offers = response;  
     });
-
+    
   }
   ngAfterViewInit() 
-  {
+  { 
     IntializeWebsiteJS();
   }
   
