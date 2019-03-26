@@ -1,6 +1,7 @@
-import { Component,AfterContentInit, AfterViewInit } from '@angular/core';
+import { Component, AfterContentInit, AfterViewInit } from '@angular/core';
 import { ProductOfferDTO } from '../models/ProductOfferDTO.model';
 import { DbManipulationService } from '../services/db-manipulation.service';
+
 
 declare function IntializeWebsiteJS(): any;
 declare function OfferSliderJS(): any;
@@ -13,24 +14,27 @@ declare function OfferSliderJS(): any;
 export class HomeComponent implements AfterViewInit {
 
   offers: ProductOfferDTO[];
-  constructor( private dbManipulationService : DbManipulationService) { }
+  constructor(private dbManipulationService: DbManipulationService) { }
 
   ngOnInit() {
 
     this.getProductOfferDTO();
 
   }
-  getProductOfferDTO(){
+  getProductOfferDTO() {
 
     this.dbManipulationService.getProductOfferDTO().subscribe(response => {
       this.offers = response;
-      OfferSliderJS();
+
+      setTimeout(() => {
+        OfferSliderJS();
+      }, 100);
+
     });
 
   }
-  ngAfterViewInit() 
-  {
+  ngAfterViewInit() {
     IntializeWebsiteJS();
   }
-  
+
 }
