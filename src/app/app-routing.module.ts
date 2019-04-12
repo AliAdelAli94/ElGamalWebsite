@@ -9,17 +9,19 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { SearchProductsResultComponent } from './search-products-result/search-products-result.component';
+import { notfound } from './not-found/not-found.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'product-details', component: ProductDetailsComponent },
+  { path: 'product-details/:code', component: ProductDetailsComponent },
   {path:'cart',component:CartComponent},
   {path:'login-register',component:LoginAndRegisterComponent},
   {path:'checkout',component:CheckoutComponent},
   {path:'my-account',component:MyAccountComponent},
   {path:'order-details',component:OrderDetailsComponent},
-  {path:'search-result',component:SearchProductsResultComponent}
+  {path:'search-result',component:SearchProductsResultComponent},
+  {path:'**',component:notfound},
 ];
 
 @NgModule({

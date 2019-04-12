@@ -2,7 +2,7 @@
 
   <!-- Product Details Area -->
   <div class="product-details-area bg-white ptb-30">
-    <div class="container">
+    <div class="container" >
 
       <div class="pdetails">
         <div class="row">
@@ -56,20 +56,13 @@
                 <span class="active"><i class="ion ion-ios-star"></i></span>
                 <span class="active"><i class="ion ion-ios-star"></i></span>
               </div>
-              <h3>هواوي ميت10 لايت,شريحتين اتصال,تخزين حتي 64,رامات4,كاميراامامية16+2</h3>
+              <h3>{{product.name}}</h3>
               <div class="pdetails-pricebox">
-                <del class="oldprice">ج.م 2000.90</del>
-                <span class="price">ج.م 1800.11</span>
-                <span class="badge">Save 3.5%</span>
+                <del class="oldprice">ج.م {{product.priceBefore}} </del>
+                <span class="price">ج.م {{product.priceAfter}}</span>
+                <span class="badge">Save {{product.discountPercentage}}</span>
               </div>
-              <p>يأتي هاتف Huawei Mate 10 Lite بتصميم من الطراز الرفيع ويبلغ وزنه 164 جرام مع
-                ارتفاع 156.2 مم وعرض 75 مم بينما يبلغ سمك الجوال 7.5 مم بالجهة الامامية للهاتف
-                نجد شاشة الهاتف وبالأعلى سماعة المكالمات بجوارها الكاميرا الامامية المزدوجة
-                ولمبة الاشعارات.بالجهة الخلفية للهاتف يوجد الكاميرا الخلفية المزدوجة مع الفلاش
-                LED وبالمنتصف مستشعر بصمة الأصابع.علي يمين الهاتف أزرار التحكم في مستوي الصوت
-                وزر فتح وغلق الهاتف وعلي يسار الهاتف مدخل شريحتي الاتصال او شريحة اتصال وكارت
-                ميموري .أسفل الهاتف يوجد مدخل السماعات الخارجية 3.5 مم ومدخل USB ومكبرات الصوت
-                الخارجي. يأتي الهاتف باللون الأزرق، الأسود والذهبي.</p>
+              <p>{{product.description}}</p>
               <div class="pdetails-quantity">
                 <div class="quantity-select">
                   <input type="text" value="1">
@@ -116,25 +109,9 @@
           <div class="tab-pane fade show active" id="product-details-area1" role="tabpanel"
             aria-labelledby="product-details-area1-tab">
             <div class="pdetails-description">
-              <p>يأتي هاتف Huawei Mate 10 Lite بتصميم من الطراز الرفيع ويبلغ وزنه 164 جرام مع
-                ارتفاع 156.2 مم وعرض 75 مم بينما يبلغ سمك الجوال 7.5 مم بالجهة الامامية للهاتف
-                نجد شاشة الهاتف وبالأعلى سماعة المكالمات بجوارها الكاميرا الامامية المزدوجة
-                ولمبة الاشعارات.بالجهة الخلفية للهاتف يوجد الكاميرا الخلفية المزدوجة مع الفلاش
-                LED وبالمنتصف مستشعر بصمة الأصابع.علي يمين الهاتف أزرار التحكم في مستوي الصوت
-                وزر فتح وغلق الهاتف وعلي يسار الهاتف مدخل شريحتي الاتصال او شريحة اتصال وكارت
-                ميموري .أسفل الهاتف يوجد مدخل السماعات الخارجية 3.5 مم ومدخل USB ومكبرات الصوت
-                الخارجي. يأتي الهاتف باللون الأزرق، الأسود والذهبي.</p>
+              <p>{{product.description}}</p>
               <ul>
-                <li>UHD 4K Output up to 60 fps</li>
-                <li>8.29MP, 1" CMOS Sensor</li>
-                <li>Dual-Pixel CMOS Autofocus Feature</li>
-                <li>Integrated 15x Optical Zoom Lens</li>
-                <li>2 x DIGIC DV 6 Processors</li>
-                <li>5-Axis Optical Image Stabilization</li>
-                <li>Wide Dynamic Range Support</li>
-                <li>Records 4K UHD/HD to Dual SD Card Slots</li>
-                <li>3.5" Touchscreen LCD & 0.24" EVF</li>
-                <li>Live Stream/FTP/Remote App via Wi-Fi</li>
+                <li *ngFor="let x of product.ProductOptions">{{x.optionText}}</li>
               </ul>
             </div>
           </div>
