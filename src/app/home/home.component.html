@@ -104,9 +104,9 @@
         <div class="product-slider-col" *ngFor="let x of offers">
           <article class="hoproduct hoproduct-2">
             <div class="hoproduct-image">
-              <a class="hoproduct-thumb" href="product-details.html">
-                <img class="hoproduct-frontimage" src="assets/images/products/product1.jpg" alt="product image">
-                <img class="hoproduct-backimage" src="assets/images/products/product1-2.jpg" alt="product image">
+              <a class="hoproduct-thumb" [routerLink]="['/product-details',x.ID]">
+                <img class="hoproduct-frontimage" [src]="x.images[0].imageUrl" alt="product image">
+                <img class="hoproduct-backimage" [src]="x.images[1].imageUrl" alt="product image">
               </a>
               <ul class="hoproduct-actionbox">
                 <li><a href="#"><i class="lnr lnr-cart"></i></a></li>
@@ -114,14 +114,14 @@
                 <li><a href="#"><i class="lnr lnr-heart"></i></a></li>
               </ul>
               <ul class="hoproduct-flags">
-                <li class="flag-pack">New</li>
+                <li class="flag-pack" *ngFor="let y of x.images">new</li>
               </ul>
             </div>
             <div class="hoproduct-countdown countdown" data-countdown="2019/7/10"></div>
             <div class="hoproduct-content">
               <h5 class="hoproduct-title"><a href="product-details.html">{{x.name}}</a></h5>
               <div class="hoproduct-rattingbox">
-                <h6>25 تقييم</h6>
+                <h6>تقييم {{x.rate}} </h6>
                 <div class="rattingbox">
                   <span class="active"><i class="ion ion-ios-star"></i></span>
                   <span class="active"><i class="ion ion-ios-star"></i></span>
@@ -132,10 +132,10 @@
               </div>
               <div class="hoproduct-pricebox">
                 <div class="pricebox">
-                  <del class="oldprice">ج.م 200</del>
-                  <span class="price">ج.م 34.11</span>
+                  <del class="oldprice">ج.م {{x.priceBefore}}</del>
+                  <span class="price">ج.م {{x.priceAfter}}</span>
                 </div>
-                <span class="discount">-5%</span>
+                <span class="discount">{{x.discountPercentage}}</span>
               </div>
             </div>
           </article>

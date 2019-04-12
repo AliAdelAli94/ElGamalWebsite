@@ -1,6 +1,9 @@
 import { ImageDTO } from './ImageDTO.model';
+import { ProductOptionDTO } from './ProductOptionDTO.model';
+import { CommentDTO } from './CommentDTO.model';
 
-export class ProductOfferDTO {
+export class GetProductById 
+{
     ID: string;
     name: string;
     priceBefore?: string;
@@ -11,4 +14,7 @@ export class ProductOfferDTO {
     parentCategoryName: string;
     discountPercentage: string;
     images: ImageDTO[]=new Array();
+    ProductOptions: ProductOptionDTO[]=new Array();
+    Comments: CommentDTO[]=new Array();
+    
 }

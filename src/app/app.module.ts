@@ -15,6 +15,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import { SearchProductsResultComponent } from './search-products-result/search-products-result.component'
 import { DbManipulationService } from './services/db-manipulation.service';
 import { HttpClientModule } from '@angular/common/http';
+import { notfound } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     CheckoutComponent,
     MyAccountComponent,
     OrderDetailsComponent,
-    SearchProductsResultComponent
+    SearchProductsResultComponent,
+    notfound
   ],
   imports: [
     BrowserModule,
