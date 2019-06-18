@@ -16,6 +16,11 @@ import { SearchProductsResultComponent } from './search-products-result/search-p
 import { DbManipulationService } from './services/db-manipulation.service';
 import { HttpClientModule } from '@angular/common/http';
 import { notfound } from './not-found/not-found.component';
+import { FormsModule } from '@angular/forms';
+import { CookieService, CookieModule } from 'ngx-cookie';
+import { SharingDataService } from './services/sharing-data.service';
+import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
+
 
 @NgModule({
   declarations: [
@@ -31,14 +36,17 @@ import { notfound } from './not-found/not-found.component';
     MyAccountComponent,
     OrderDetailsComponent,
     SearchProductsResultComponent,
-    notfound
+    notfound,
+    ConfirmOrderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    CookieModule.forRoot()
   ],
-  providers: [DbManipulationService],
+  providers: [DbManipulationService,SharingDataService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

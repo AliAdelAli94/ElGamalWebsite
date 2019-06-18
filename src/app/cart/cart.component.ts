@@ -1,4 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { CardDTO } from '../models/CardDTO.model';
+import { SharingDataService } from '../services/sharing-data.service';
 
 declare function IntializeWebsiteJS(): any;
 
@@ -9,16 +11,21 @@ declare function IntializeWebsiteJS(): any;
 })
 export class CartComponent {
 
-  constructor() {
-
+  cardData : CardDTO = new CardDTO();
+  constructor(private sharingDataService : SharingDataService) {
+    this.getCardData();
   }
 
 
   ngAfterViewInit() {
-
-IntializeWebsiteJS();
-
+    IntializeWebsiteJS();
   }
 
-  
+  getCardData() {
+    this.sharingDataService.cardData.subscribe(response => {
+      this.cardData = response;
+    });
+  };
+
+
 }

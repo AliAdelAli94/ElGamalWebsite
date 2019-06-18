@@ -10,6 +10,8 @@ import { MyAccountComponent } from './my-account/my-account.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import { SearchProductsResultComponent } from './search-products-result/search-products-result.component';
 import { notfound } from './not-found/not-found.component';
+import { AuthGuard } from './auth.guard';
+import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,11 +19,12 @@ const routes: Routes = [
   { path: 'product-details/:code', component: ProductDetailsComponent },
   {path:'cart',component:CartComponent},
   {path:'login-register',component:LoginAndRegisterComponent},
-  {path:'checkout',component:CheckoutComponent},
+  {path:'checkout',component:CheckoutComponent,canActivate: [AuthGuard]},
   {path:'my-account',component:MyAccountComponent},
   {path:'order-details',component:OrderDetailsComponent},
   {path:'search-result',component:SearchProductsResultComponent},
-  {path:'**',component:notfound},
+  {path:'confirm-order',component:ConfirmOrderComponent},
+  {path:'**',component:notfound}
 ];
 
 @NgModule({

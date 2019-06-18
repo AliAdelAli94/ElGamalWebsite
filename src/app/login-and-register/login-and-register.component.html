@@ -3,26 +3,47 @@
   <div class="my-account-area ptb-30">
     <div class="container">
       <div class="row">
-
         <!-- Login Form -->
         <div class="col-lg-6">
+
+          <div class="alert alert-danger" role="alert" *ngIf="incorrectUsernameOrPasswordFlag == true">
+            الإيميل أو الباسورد خطأ ...
+          </div>
+
           <div class="login-form-wrapper">
-            <form action="#" class="ho-form ho-form-boxed">
+            <form class="ho-form ho-form-boxed" role="form" #loginForm="ngForm">
               <div class="ho-form-inner">
                 <div class="single-input">
-                  <label for="login-form-email">الإيميل *</label>
-                  <input type="text" name="login-form-email" id="login-form-email">
+                  <label for="userEmailLogin">الإيميل <span class="span-star">*</span></label>
+                  <input type="text" name="userEmailLogin" id="userEmailLogin" [(ngModel)]="loginDto.email"
+                    #userEmailLoginControl="ngModel" required email>
+
+                  <div class="invalid-feedback"
+                    *ngIf="userEmailLoginControl.errors?.required && (userEmailLoginControl.dirty || saveFormLogin == true)">
+                    يجب إدخال هذا الحقل
+                  </div>
+
+                  <div class="invalid-feedback" *ngIf="userEmailLoginControl.errors?.email && (userEmailLoginControl.dirty || saveFormLogin == true)">
+                    يجب إدخال إيميل صحيح
+                  </div>
+                </div>
+
+                <div class="single-input">
+                  <label for="userPasswordLogin">الباسورد <span class="span-star">*</span></label>
+                  <input type="password" name="userPasswordLogin" id="userPasswordLogin" [(ngModel)]="loginDto.password"
+                    #userPasswordLoginControl="ngModel" required>
+                  
+                    <div class="invalid-feedback" *ngIf="userPasswordLoginControl.errors?.required && (userPasswordLoginControl.dirty || saveFormLogin == true)">
+                    يجب إدخال هذا الحقل
+                  </div>
                 </div>
                 <div class="single-input">
-                  <label for="login-form-password">الباسورد *</label>
-                  <input type="password" name="login-form-password" id="login-form-password">
-                </div>
-                <div class="single-input">
-                  <button type="submit" class="ho-button ho-button-dark mr-3">
+                  <button type="submit" class="ho-button ho-button-dark mr-3" (click)="login()">
                     <span>تسجيل الدخول</span>
                   </button>
-                  <button type="button" class="mr-3 btn-facebook"><i class="fab fa-facebook-f"></i></button>
-                  <button type="button" class="mr-3 btn-google"><i class="fab fa-google"></i></button>
+                  <button type="button" class="mr-3 btn-facebook" *ngIf="false"><i
+                      class="fab fa-facebook-f"></i></button>
+                  <button type="button" class="mr-3 btn-google" *ngIf="false"><i class="fab fa-google"></i></button>
 
                 </div>
               </div>
@@ -33,28 +54,81 @@
 
         <!-- Register Form -->
         <div class="col-lg-6 mt-30 mt-lg-0">
+
+          <div class="alert alert-danger" role="alert" *ngIf="accountAlreadyExistFlag == true">
+            هذا الإيميل موجود من قبل
+          </div>
+
+          <div class="alert alert-info" role="alert" *ngIf="accountedCreatedFlag == true">
+            تم إنشاء الحساب
+          </div>
+
           <div class="login-form-wrapper">
-            <form action="#" class="ho-form ho-form-boxed">
+            <form class="ho-form ho-form-boxed" role="form" #registerForm="ngForm">
               <div class="ho-form-inner">
                 <div class="single-input">
-                  <label for="register-form-name">إسم المستخدم *</label>
-                  <input type="text" name="register-form-name" id="register-form-name">
+                  <label for="userName">إسم المستخدم <span class="span-star">*</span></label>
+                  <input type="text" name="userName" id="userName" [(ngModel)]="regsiterDto.userName"
+                    #userNameControl="ngModel" required>
+
+                  <div class="invalid-feedback"
+                    *ngIf="userNameControl.errors?.required && (userNameControl.dirty || saveForm == true)">
+                    يجب إدخال هذا الحقل
+                  </div>
                 </div>
+
                 <div class="single-input">
-                  <label for="register-form-email">الإيميل *</label>
-                  <input type="text" name="register-form-email" id="register-form-email">
+                  <label for="userEmail">الإيميل <span class="span-star">*</span></label>
+                  <input type="text" name="userEmail" id="userEmail" [(ngModel)]="regsiterDto.email"
+                    #userEmailControl="ngModel" required email>
+                  <div class="invalid-feedback"
+                    *ngIf="userEmailControl.errors?.required && (userEmailControl.dirty || saveForm == true)">
+                    يجب إدخال هذا الحقل
+                  </div>
+
+                  <div class="invalid-feedback"
+                    *ngIf="userEmailControl.errors?.email && (userEmailControl.dirty || saveForm == true)">
+                    يجب إدخال إيميل صحيح
+                  </div>
+
                 </div>
+
                 <div class="single-input">
-                  <label for="register-form-password">الباسورد *</label>
-                  <input type="password" name="register-form-password" id="register-form-password">
+                  <label for="userPassword">الباسورد <span class="span-star">*</span></label>
+                  <input type="password" [(ngModel)]="regsiterDto.password" name="userPassword" id="userPassword"
+                    #userPasswordControl="ngModel" required>
+
+                  <div class="invalid-feedback"
+                    *ngIf="userPasswordControl.errors?.required && (userPasswordControl.dirty || saveForm == true)">
+                    يجب إدخال هذا الحقل
+                  </div>
+
                 </div>
+
                 <div class="single-input">
-                  <button type="submit" class="ho-button ho-button-dark mr-3">
+                  <label for="userConfirmPassword">تأكيد الباسورد <span class="span-star">*</span></label>
+                  <input type="password" [(ngModel)]="regsiterDto.confirmPassword" name="userConfirmPassword"
+                    id="userConfirmPassword" #userConfirmPasswordControl="ngModel" required (input)="checkPasswords()">
+
+                  <div class="invalid-feedback"
+                    *ngIf="userConfirmPasswordControl.errors?.required && (userConfirmPasswordControl.dirty || saveForm == true)">
+                    يجب إدخال هذا الحقل
+                  </div>
+
+                  <div class="invalid-feedback" *ngIf="passwordNotMatchFlag == true">
+                    يجب أن يكون الباسورد و تأكيد الباسورد متطابقان
+                  </div>
+
+                </div>
+
+                <div class="single-input">
+                  <button type="submit" class="ho-button ho-button-dark mr-3" (click)="addUser()">
                     <span>إنشاء حساب</span>
                   </button>
 
-                  <button type="button" class="mr-3 btn-facebook"><i class="fab fa-facebook-f"></i></button>
-                  <button type="button" class="mr-3 btn-google"><i class="fab fa-google"></i></button>
+                  <button type="button" class="mr-3 btn-facebook" *ngIf="false"><i
+                      class="fab fa-facebook-f"></i></button>
+                  <button type="button" class="mr-3 btn-google" *ngIf="false"><i class="fab fa-google"></i></button>
 
                 </div>
               </div>

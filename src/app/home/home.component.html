@@ -109,15 +109,12 @@
                 <img class="hoproduct-backimage" [src]="x.images[1].imageUrl" alt="product image">
               </a>
               <ul class="hoproduct-actionbox">
-                <li><a href="#"><i class="lnr lnr-cart"></i></a></li>
+                <li><a (click)="AddToCart(x.ID)"><i class="lnr lnr-cart"></i></a></li>
                 <li><a href="#" class="quickview-trigger"><i class="lnr lnr-eye"></i></a></li>
                 <li><a href="#"><i class="lnr lnr-heart"></i></a></li>
               </ul>
-              <ul class="hoproduct-flags">
-                <li class="flag-pack" *ngFor="let y of x.images">new</li>
-              </ul>
+             
             </div>
-            <div class="hoproduct-countdown countdown" data-countdown="2019/7/10"></div>
             <div class="hoproduct-content">
               <h5 class="hoproduct-title"><a href="product-details.html">{{x.name}}</a></h5>
               <div class="hoproduct-rattingbox">

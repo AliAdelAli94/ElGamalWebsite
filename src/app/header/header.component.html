@@ -34,104 +34,76 @@
               <img src="assets/images/logo/logo.png" alt="logo">
             </a>
           </div>
+          
           <div class="col-lg-6 col-12 order-3 order-lg-2">
-            <form action="#" class="header-searchbox">
-              <select class="select-searchcategory">
-                <option value="0">اقسام الجمل</option>
-                <option value="1">اجهزة مراقبة </option>
-                <option value="2">اقراص صلبة </option>
-                <option value="3">اكسسوارت </option>
-                <option value="4">العاب</option>
-                <option value="5">تليفزيونات</option>
-                <option value="6">حقائب كمبيوتر </option>
-                <option value="7">ستلايت وريسيفر </option>
-                <option value="8">سماعات </option>
-                <option value="9">طابعات </option>
-                <option value="10">فلاش ميموري</option>
-                <option value="11">كاميرات واكسسوارات</option>
-                <option value="12">لاب توب</option>
-                <option value="13">ماسحات ضوئية </option>
-                <option value="14">ماوس و كيبورد</option>
-                <option value="15">مستلزمات شبكات </option>
-                <option value="16">موبايل وتابلت</option>
-                <option value="17">يو بى اس</option>
-                <option value="18">اجهزة كمبيوتر</option>
-              </select>
-              <input type="text" placeholder="إكتب كلمة البحث الخاصة بك ...">
-              <button type="submit"><i class="lnr lnr-magnifier"></i></button>
+            <form class="header-searchbox" role="form" #searchForm="ngForm">
+
+              <input type="text" name="searchName" [(ngModel)]="sharingDataService.filterDTO.NamePart"
+              #searchNameControl="ngModel" placeholder="إكتب كلمة البحث الخاصة بك ...">
+
+              <button type="submit" (click)="search()"><i class="lnr lnr-magnifier"></i></button>
+
             </form>
           </div>
+
           <div class="col-lg-3 col-md-6 col-sm-6 order-2 order-lg-3">
             <div class="header-icons">
               <div class="header-account">
                 <button class="header-accountbox-trigger"><span class="lnr lnr-user"></span> حسابي
                   <i class="ion ion-ios-arrow-down"></i></button>
                 <ul class="header-accountbox dropdown-list">
-                  <li>
+                  <li *ngIf="loggedInFlag == true">
                     <a [routerLink]="['/cart']">تعديل الحساب</a>
                   </li>
-                  <li>
+                  <li *ngIf="loggedInFlag == true">
                     <a [routerLink]="['/product-details']">المفضلة</a>
                   </li>
-                  <li>
+                  <li *ngIf="loggedInFlag == true">
                     <a [routerLink]="['/search-result']">طلباتي</a>
                   </li>
-                  <li>
+                  <li *ngIf="loggedInFlag == false">
                     <a [routerLink]="['/login-register']">تسجيل الدخول</a>
                   </li>
+                  <li *ngIf="loggedInFlag == true">
+                      <a (click)="logout()" style="cursor:pointer">تسجيل الخروج</a>
+                    </li>
                 </ul>
               </div>
-              <div class="header-cart">
-                <a class="header-carticon" href="cart.html"><i class="lnr lnr-cart"></i><span
-                    class="count">5</span></a>
+
+              <div class="header-cart" *ngIf="CardHasDataFlag == true">
+                <a class="header-carticon" href=""><i class="lnr lnr-cart"></i><span
+                    class="count">{{cardData.selectedProducts.length}}</span></a>
 
                 <!-- Minicart -->
                 <div class="header-minicart minicart">
                   <div class="minicart-header">
-                    <div class="minicart-product">
+
+                    <div class="minicart-product" *ngFor="let x of cardData.selectedProducts">
                       <div class="minicart-productimage">
-                        <a href="product-details.html">
-                          <img src="assets/images/products/product1.jpg" alt="product image">
+                        <a>
+                          <img [src]="x.images[0].imageUrl" alt="product image">
                         </a>
-                        <span class="minicart-productquantity">3x</span>
+                        <span class="minicart-productquantity">{{x.NumberOfItems}}x</span>
                       </div>
                       <div class="minicart-productcontent">
-                        <h6><a href="product-details.html">طابعة ليزر كانون اي سينس الكل في
-                            واحد MF3010
-                            Roku Smart TV</a></h6>
-                        <span class="minicart-productprice">1000.00 ج.م</span>
+                        <h6><a>{{x.name}}</a></h6>
+                        <span class="minicart-productprice">{{x.priceAfter}} ج.م</span>
                       </div>
                       <button class="minicart-productclose"><i
                           class="ion ion-ios-close-circle"></i></button>
                     </div>
-                    <div class="minicart-product">
-                      <div class="minicart-productimage">
-                        <a href="product-details.html">
-                          <img src="assets/images/products/product2.jpg" alt="product image">
-                        </a>
-                        <span class="minicart-productquantity">2x</span>
-                      </div>
-                      <div class="minicart-productcontent">
-                        <h6><a href="product-details.html">هواوي ميت10 لايت,شريحتين
-                            اتصال,تخزين حتي 64,رامات4,كاميراامامية16+2
-                            Camcorder</a></h6>
-                        <span class="minicart-productprice">500.00 ج.م</span>
-                      </div>
-                      <button class="minicart-productclose"><i
-                          class="ion ion-ios-close-circle"></i></button>
-                    </div>
+
                   </div>
                   <ul class="minicart-pricing">
-                    <li>قيمة المنتجات <span>1200.12 ج.م</span></li>
-                    <li>قيمة التوصيل <span>7.00 ج.م</span></li>
-                    <li>الضريبة المضافة <span>0.00 ج.م</span></li>
-                    <li>الإجمالي <span>31.12 ج.م</span></li>
+                    <li>قيمة المنتجات <span>{{cardData.productsPrice}} ج.م</span></li>
+                    <li>قيمة التوصيل <span>{{cardData.shipingPrice}} ج.م</span></li>
+                    <li>الإجمالي <span>{{cardData.totalPrice}} ج.م</span></li>
                   </ul>
                   <div class="minicart-footer">
-                    <a href="cart.html" class="ho-button ho-button-fullwidth">
+                      <a [routerLink]="['/cart']" class="ho-button ho-button-fullwidth">
                       <span>عربة التسوق</span>
                     </a>
-                    <a href="checkout.html"
+                    <a
                       class="ho-button ho-button-dark ho-button-fullwidth">
                       <span>إستكمال الطلب</span>
                     </a>
@@ -140,8 +112,10 @@
                 <!--// Minicart -->
 
               </div>
+
             </div>
           </div>
+
         </div>
       </div>
     </div>

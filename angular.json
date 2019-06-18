@@ -22,11 +22,7 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "src/assets/css/bootstrap.min.css",
-              "src/assets/css/plugins.css",
-              "src/assets/style.css",
-              "src/assets/css/custom.css"            
+            "styles": [    
             ],
             "scripts": [
               "src/assets/js/vendor/modernizr-3.6.0.min.js",

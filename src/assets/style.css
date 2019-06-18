@@ -2653,6 +2653,7 @@ blockquote {
 .cr-pagination ul li:hover a,
 .cr-pagination ul li.active a {
   background: #0B88EE;
+  color: #fff;
 }
 
 /**
@@ -8470,6 +8471,10 @@ body {
   border-radius: 7px;
 }
 
+.span-star{
+  color: #dc3545;
+}
+
 
 .btn-google{
   background-color:#dd4b39!important;
@@ -8503,3 +8508,45 @@ only screen and (max-width: 767px) {
     content: "\f3cf";
   }
 }
+
+.valid-feedback{
+  display: inline;
+}
+
+
+/* spinner css */
+
+.lds-dual-ring {
+  background: none repeat scroll 0 0 black;
+  position: fixed;
+  display: block;
+  opacity: 0.5;
+  z-index: 1000001;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+.lds-dual-ring:after {
+  content: " ";
+  width: 46px;
+  height: 46px;
+  position: fixed;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  background-color: #000;
+  border: 5px solid;
+  border-color: #f6a24a transparent #f6a24a  transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ----------- */

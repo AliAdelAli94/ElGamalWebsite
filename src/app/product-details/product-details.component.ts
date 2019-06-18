@@ -13,7 +13,7 @@ declare function IntializeWebsiteJS(): any;
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements AfterViewInit {
-  product: GetProductById[];
+  product: GetProductById = new GetProductById();
   constructor(private dbManipulationService: DbManipulationService, private _activatedRoute: ActivatedRoute) { }
 
   ngOnInit()
