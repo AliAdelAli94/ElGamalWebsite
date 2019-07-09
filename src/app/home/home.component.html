@@ -110,13 +110,13 @@
               </a>
               <ul class="hoproduct-actionbox">
                 <li><a (click)="AddToCart(x.ID)"><i class="lnr lnr-cart"></i></a></li>
-                <li><a href="#" class="quickview-trigger"><i class="lnr lnr-eye"></i></a></li>
-                <li><a href="#"><i class="lnr lnr-heart"></i></a></li>
+                <li><a [routerLink]="['/product-details',x.ID]" class="quickview-trigger"><i class="lnr lnr-eye"></i></a></li>
+                <li><a><i class="lnr lnr-heart"></i></a></li>
               </ul>
              
             </div>
             <div class="hoproduct-content">
-              <h5 class="hoproduct-title"><a href="product-details.html">{{x.name}}</a></h5>
+              <h5 class="hoproduct-title"><a [routerLink]="['/product-details',x.ID]">{{x.name}}</a></h5>
               <div class="hoproduct-rattingbox">
                 <h6>تقييم {{x.rate}} </h6>
                 <div class="rattingbox">

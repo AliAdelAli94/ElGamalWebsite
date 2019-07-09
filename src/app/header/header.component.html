@@ -14,8 +14,8 @@
                 <button class="select-language-current"><img src="assets/images/icons/eg.png"
                     alt="us icon">العربية</button>
                 <ul class="select-language-list dropdown-list">
-                  <li><a href="#"><img src="assets/images/icons/eg.png" alt="eg icon">العربية</a></li>
-                  <li><a href="#"><img src="assets/images/icons/us.png" alt="us icon">English</a></li>
+                  <li><a [routerLink]="['/home']" ><img src="assets/images/icons/eg.png" alt="eg icon">العربية</a></li>
+                  <li><a [routerLink]="['/home']" ><img src="assets/images/icons/us.png" alt="us icon">English</a></li>
                 </ul>
               </div>
             </div>
@@ -30,7 +30,7 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-3 col-md-6 col-sm-6 order-1 order-lg-1">
-            <a href="index.html" class="header-logo">
+            <a class="header-logo">
               <img src="assets/images/logo/logo.png" alt="logo">
             </a>
           </div>
@@ -103,7 +103,7 @@
                       <a [routerLink]="['/cart']" class="ho-button ho-button-fullwidth">
                       <span>عربة التسوق</span>
                     </a>
-                    <a
+                    <a [routerLink]="['/checkout']"
                       class="ho-button ho-button-dark ho-button-fullwidth">
                       <span>إستكمال الطلب</span>
                     </a>
@@ -134,12 +134,12 @@
               </button>
               <nav class="catmenu-body">
                 <ul>
-                  <li class="catmenu-dropdown" *ngFor="let x of categories"><a href="#"><i
+                  <li class="catmenu-dropdown" *ngFor="let x of categories"><a><i
                         class="ion ion-ios-desktop"></i>{{x.name}}</a>
                     <ul class="megamenu catmenu-megamenu">
-                      <li><a href="#" >الأقسام الفرعية</a>
+                      <li><a>الأقسام الفرعية</a>
                         <ul>
-                          <li><a *ngFor="let z of x.childCategories" href="#">{{z.name}}</a></li>
+                          <li><a *ngFor="let z of x.childCategories" [routerLink]="['/search-result',z.ID]">{{z.name}}</a></li>
                           <li *ngIf="!x.childCategories || x.childCategories.length==0">
                             <h5>لا توجد أقسام فرعية</h5>
                           </li>

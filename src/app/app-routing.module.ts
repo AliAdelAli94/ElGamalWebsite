@@ -23,6 +23,7 @@ const routes: Routes = [
   {path:'my-account',component:MyAccountComponent},
   {path:'order-details',component:OrderDetailsComponent},
   {path:'search-result',component:SearchProductsResultComponent},
+  {path:'search-result/:categoryID',component:SearchProductsResultComponent},
   {path:'confirm-order',component:ConfirmOrderComponent},
   {path:'**',component:notfound}
 ];

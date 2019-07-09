@@ -43,6 +43,7 @@ export class CheckoutComponent implements AfterViewInit {
       this.dbManipulationService.makeOrder(this.orderData).subscribe(response => {
         let result : MakeOrderResultDTO  = response;
         if(result.StatusCode == 0){
+          this.sharingDataService.setCardData(new CardDTO());
           this.router.navigateByUrl('/confirm-order');
         }
       },()=>{},()=>{

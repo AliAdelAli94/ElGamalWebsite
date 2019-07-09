@@ -2,49 +2,24 @@
 
   <!-- Product Details Area -->
   <div class="product-details-area bg-white ptb-30">
-    <div class="container" >
+    <div class="container">
 
       <div class="pdetails">
         <div class="row">
           <div class="col-lg-6">
             <div class="pdetails-images">
               <div class="pdetails-largeimages pdetails-imagezoom">
-                <div class="pdetails-singleimage" data-src="assets/images/products/product2.jpg">
-                  <img src="assets/images/products/product2.jpg" alt="product image">
-                </div>
-                <div class="pdetails-singleimage" data-src="assets/images/products/product2.jpg">
-                  <img src="assets/images/products/product2.jpg" alt="product image">
-                </div>
-                <div class="pdetails-singleimage" data-src="assets/images/products/product2.jpg">
-                  <img src="assets/images/products/product2.jpg" alt="product image">
-                </div>
-                <div class="pdetails-singleimage" data-src="assets/images/products/product2.jpg">
-                  <img src="assets/images/products/product2.jpg" alt="product image">
-                </div>
-                <div class="pdetails-singleimage" data-src="assets/images/products/product2.jpg">
-                  <img src="assets/images/products/product1-2.jpg" alt="product image">
-                </div>
-                <div class="pdetails-singleimage" data-src="assets/images/products/product2.jpg">
-                  <img src="assets/images/products/product2.jpg" alt="product image">
+                <div class="pdetails-singleimage"
+                  *ngFor="let x of product.images">
+                  <img [src]="x.imageUrl" alt="product image">
                 </div>
               </div>
 
               <div class="pdetails-thumbs">
-                <div class="pdetails-singlethumb">
-                  <img src="assets/images/products/product2.jpg" alt="product thumb">
+                <div class="pdetails-singlethumb" *ngFor="let x of product.images">
+                  <img [src]="x.imageUrl" alt="product thumb">
                 </div>
-                <div class="pdetails-singlethumb">
-                  <img src="assets/images/products/product2.jpg" alt="product thumb">
-                </div>
-                <div class="pdetails-singlethumb">
-                  <img src="assets/images/products/product2.jpg" alt="product thumb">
-                </div>
-                <div class="pdetails-singlethumb">
-                  <img src="assets/images/products/product1-2.jpg" alt="product thumb">
-                </div>
-                <div class="pdetails-singlethumb">
-                  <img src="assets/images/products/product1-2.jpg" alt="product thumb">
-                </div>
+
               </div>
             </div>
           </div>
@@ -52,10 +27,13 @@
             <div class="pdetails-content">
 
               <div class="rattingbox">
-                <span class="active"><i class="ion ion-ios-star"></i></span>
-                <span class="active"><i class="ion ion-ios-star"></i></span>
-                <span class="active"><i class="ion ion-ios-star"></i></span>
+                <span class="active" *ngIf="product.rate >= 1" ><i class="ion ion-ios-star"></i></span>
+                <span class="active" *ngIf="product.rate >= 2" ><i class="ion ion-ios-star"></i></span>
+                <span class="active" *ngIf="product.rate >= 3" ><i class="ion ion-ios-star"></i></span>
+                <span class="active" *ngIf="product.rate >= 4" ><i class="ion ion-ios-star"></i></span>
+                <span class="active" *ngIf="product.rate >= 5" ><i class="ion ion-ios-star"></i></span>
               </div>
+
               <h3>{{product.name}}</h3>
               <div class="pdetails-pricebox">
                 <del class="oldprice">ج.م {{product.priceBefore}} </del>
@@ -63,17 +41,7 @@
                 <span class="badge">Save {{product.discountPercentage}}</span>
               </div>
               <p>{{product.description}}</p>
-              <div class="pdetails-quantity">
-                <div class="quantity-select">
-                  <input type="text" value="1">
-                  <div class="inc qtybutton">+<i class="ion ion-ios-arrow-up"></i></div>
-                  <div class="dec qtybutton">-<i class="ion ion-ios-arrow-down"></i></div>
-                </div>
-                <a href="shop-rightsidebar.html" class="ho-button">
-                  <i class="lnr lnr-cart"></i>
-                  <span>أضف إلي العربة</span>
-                </a>
-              </div>
+
               <div class="pdetails-categories">
                 <span>القسم :</span>
                 <ul>
@@ -101,7 +69,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" id="product-details-area3-tab" data-toggle="tab" href="#product-details-area3"
-              role="tab" aria-controls="product-details-area3" aria-selected="false">التقييم (25)</a>
+              role="tab" aria-controls="product-details-area3" aria-selected="false">التقييم ({{product.Comments.length}})</a>
           </li>
         </ul>
 
@@ -120,83 +88,56 @@
             aria-labelledby="product-details-area3-tab">
             <div class="pdetails-reviews">
               <div class="product-review">
-                <div class="commentlist">
+                <div class="commentlist" *ngIf="product.Comments.length > 0" id="ReviewsAndComments" >
                   <h5>التعليقات و التقيمات</h5>
-                  <div class="single-comment">
+
+                  <div class="single-comment" *ngFor="let h of product.Comments">
                     <div class="single-comment-content">
                       <div class="single-comment-content-top">
-                        <h6>بواسطة أحمد محمد .... في 22 أغسطس 2018</h6>
+                        <h6>بواسطة ... {{h.userName}}</h6>
                         <div class="rattingbox">
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
+                          <span [ngClass]="{'active': h.ratingValue >= 1 }"><i class="ion ion-ios-star"></i></span>
+                          <span [ngClass]="{'active': h.ratingValue >= 2 }"><i class="ion ion-ios-star"></i></span>
+                          <span [ngClass]="{'active': h.ratingValue >= 3 }"><i class="ion ion-ios-star"></i></span>
+                          <span [ngClass]="{'active': h.ratingValue >= 4 }"><i class="ion ion-ios-star"></i></span>
+                          <span [ngClass]="{'active': h.ratingValue >= 5 }"><i class="ion ion-ios-star"></i></span>
                         </div>
                       </div>
-                      <p>هذا المنتج رائع يستحق التجربة .</p>
+                      <p>{{h.commentText}}</p>
                     </div>
                   </div>
 
-                  <div class="single-comment">
-                    <div class="single-comment-content">
-                      <div class="single-comment-content-top">
-                        <h6>بواسطة أحمد محمد .... في 22 أغسطس 2018</h6>
-                        <div class="rattingbox">
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                        </div>
-                      </div>
-                      <p>هذا المنتج رائع يستحق التجربة .</p>
-                    </div>
-                  </div>
-                  <div class="single-comment">
-                    <div class="single-comment-content">
-                      <div class="single-comment-content-top">
-                        <h6>بواسطة أحمد محمد .... في 22 أغسطس 2018</h6>
-                        <div class="rattingbox">
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                        </div>
-                      </div>
-                      <p>هذا المنتج رائع يستحق التجربة .</p>
-                    </div>
-                  </div>
                 </div>
-                <div class="commentbox mt-5">
+                <div class="commentbox mt-5" *ngIf="userLoggedIn == true">
                   <h5>أضف تعليقك و تقييمك</h5>
-                  <form action="#" class="ho-form">
+                  <form action="#" class="ho-form" #AddCommentForm="ngForm">
                     <div class="ho-form-inner">
+
                       <div class="single-input">
                         <label>التقييم</label>
                         <div class="rattingbox hover-action">
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                          <span class="active"><i class="ion ion-ios-star"></i></span>
-                          <span><i class="ion ion-ios-star"></i></span>
-                          <span><i class="ion ion-ios-star"></i></span>
+                          <span class="active starsRate"><i class="ion ion-ios-star"></i></span>
+                          <span class="active starsRate"><i class="ion ion-ios-star"></i></span>
+                          <span class="active starsRate"><i class="ion ion-ios-star"></i></span>
+                          <span class="starsRate"><i class="ion ion-ios-star"></i></span>
+                          <span class="starsRate"><i class="ion ion-ios-star"></i></span>
                         </div>
                       </div>
+
                       <div class="single-input">
-                        <label for="new-review-textbox">التعليق</label>
-                        <textarea id="new-review-textbox" cols="30" rows="5"></textarea>
+                        <label for="userComment">التعليق</label>
+                        <textarea id="userComment" name="userComment" cols="30" rows="5"
+                          [(ngModel)]="CommentDto.commentText" #userCommentControl="ngModel" required></textarea>
+
+                        <div class="invalid-feedback"
+                          *ngIf="userCommentControl.errors?.required && (userCommentControl.dirty || saveForm == true)">
+                          يجب إدخال هذا الحقل
+                        </div>
+
                       </div>
+
                       <div class="single-input">
-                        <label for="new-review-name">الإسم *</label>
-                        <input type="text" id="new-review-name">
-                      </div>
-                      <div class="single-input">
-                        <label for="new-review-email">الإيميل *</label>
-                        <input type="email" id="new-review-email">
-                      </div>
-                      <div class="single-input">
-                        <button class="ho-button" type="submit"><span>إرسال</span></button>
+                        <button class="ho-button" (click)="AddComment()"><span>إرسال</span></button>
                       </div>
                     </div>
                   </form>
@@ -213,3 +154,12 @@
   </div>
   <!--// Product Details Area -->
 </main>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="confirmAddCommentModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body" style="text-align: center">لقد تم إضافة تعليقك بنجاح</div>  
+      </div>
+    </div>
+  </div>

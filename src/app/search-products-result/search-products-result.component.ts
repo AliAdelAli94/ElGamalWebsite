@@ -6,7 +6,7 @@ import { CardDTO } from '../models/CardDTO.model';
 import { ProductDTO } from '../models/ProductDTO.model';
 import { ImageDTO } from '../models/ImageDTO.model';
 import { SpinnerServieService } from '../services/spinner-servie.service';
-
+import { Router, ActivatedRoute } from '@angular/router';
 
 declare function IntializeWebsiteJS(): any;
 declare function IntializeRangeSlider(): any;
@@ -21,13 +21,18 @@ export class SearchProductsResultComponent implements AfterViewInit, OnInit {
   filteredData: FilteredProductsDTO = new FilteredProductsDTO();
 
   constructor(private dbManipulationService: DbManipulationService, 
-    public sharingDataService: SharingDataService,private spinnerService : SpinnerServieService) { }
+    public sharingDataService: SharingDataService,private spinnerService : SpinnerServieService, 
+    private _routeParams : ActivatedRoute) { }
 
   ngAfterViewInit() {
     IntializeWebsiteJS();
   }
 
   ngOnInit() {
+    let categoryID = this._routeParams.snapshot.params['categoryID'];
+    if(categoryID){
+      this.sharingDataService.filterDTO.CategoryID = categoryID;
+    }
     this.getFilteredProducts();
   }
 
@@ -67,7 +72,7 @@ export class SearchProductsResultComponent implements AfterViewInit, OnInit {
   }
 
   changeSortingType(event: any, val: number) {
-
+    
     this.sharingDataService.filterDTO.SortingType = val;
     document.getElementsByClassName("select-sortby-current")[0].innerHTML = event.currentTarget.innerHTML;
 
@@ -76,7 +81,6 @@ export class SearchProductsResultComponent implements AfterViewInit, OnInit {
   }
 
   changePageNumber(PageNumber: number) {
-
     this.sharingDataService.filterDTO.PageNumber = PageNumber;
   }
 

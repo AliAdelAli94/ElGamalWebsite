@@ -10,6 +10,7 @@ import { ProductFilterDTO } from '../models/ProductFilterDTO.model';
 import { FilteredProductsDTO } from '../models/FilteredProductsDTO.model';
 import { OrderDTO } from '../models/OrderDTO.model';
 import { ProductDTO } from '../models/ProductDTO.model';
+import { CommentDTO } from '../models/CommentDTO.model';
 
 @Injectable({
   providedIn: 'root'
@@ -55,9 +56,19 @@ export class DbManipulationService {
     });
   }
 
+  
   makeOrder(item: OrderDTO): Observable<any> {
 
     return this.httpClient.post(AppSettings.webApiUrl + "Order/MakeOrder", item, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  AddComment(item: CommentDTO): Observable<any> {
+
+    return this.httpClient.post(AppSettings.webApiUrl + "Product/AddComment", item, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
