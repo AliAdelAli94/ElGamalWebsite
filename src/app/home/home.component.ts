@@ -7,6 +7,7 @@ import { CardDTO } from '../models/CardDTO.model';
 
 declare function IntializeWebsiteJS(): any;
 declare function OfferSliderJS(): any;
+declare var $ : any;
 
 @Component({
   selector: 'app-home',
@@ -42,7 +43,7 @@ export class HomeComponent implements AfterViewInit {
     setTimeout(() => 
       {
         IntializeWebsiteJS();
-      }, 100);
+      }, 200);
   }
 
   
@@ -72,6 +73,8 @@ export class HomeComponent implements AfterViewInit {
     cardData.totalPrice = cardData.shipingPrice + cardData.productsPrice;
 
     this.sharingDataService.setCardData(cardData);
+    $('#confirmAddNewItemModal').modal('show');
+
 
   }
 

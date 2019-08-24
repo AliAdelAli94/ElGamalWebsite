@@ -1,6 +1,7 @@
-import { Component,AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 
-declare function IntializeFirstTimeOnly() :any
+declare function IntializeFirstTimeOnly(): any;
+declare var $: any;
 
 @Component({
   selector: 'app-root',
@@ -11,11 +12,12 @@ export class AppComponent implements AfterViewInit {
   constructor() {
 
   }
-  title = 'MyFirstAngularApp';
+  title = 'El Gamal Website';
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
 
     IntializeFirstTimeOnly();
   }
 
+  
 }

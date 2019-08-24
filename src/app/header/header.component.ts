@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { CardDTO } from '../models/CardDTO.model';
 import { SpinnerServieService } from '../services/spinner-servie.service';
 
+declare var $: any;
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -16,12 +18,12 @@ export class HeaderComponent implements OnInit {
 
   categories: ParentCategoryDto[];
   loggedInFlag: boolean = false;
-  CardHasDataFlag : boolean = false;
+  CardHasDataFlag: boolean = false;
   userDto: UserDTO = new UserDTO();
   cardData: CardDTO = new CardDTO();
 
   constructor(private dbManipulationService: DbManipulationService,
-    public sharingDataService: SharingDataService, private router: Router,private spinnerService : SpinnerServieService) { }
+    public sharingDataService: SharingDataService, public router: Router, private spinnerService: SpinnerServieService) { }
 
   ngOnInit() {
     this.getparentCategories();
@@ -37,12 +39,13 @@ export class HeaderComponent implements OnInit {
         if (this.cardData.productsPrice > 0) {
           this.CardHasDataFlag = true;
         }
-        else{
+        else {
           this.CardHasDataFlag = false;
         }
       }
     });
   };
+
 
   getLoggedInUser() {
     this.sharingDataService.userData.subscribe(response => {
@@ -59,9 +62,38 @@ export class HeaderComponent implements OnInit {
     this.spinnerService.showSpinner();
     this.dbManipulationService.getparentCategories().subscribe(response => {
       this.categories = response;
-    },()=>{},()=>{
+    }, () => { }, () => {
       this.spinnerService.hideSpinner();
     });
+  };
+
+  navigateToCompleteOrder() {
+    this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/checkout']));
+  };
+
+  navigateToSearchProductsPage(id: string) {
+
+    this.sharingDataService.filterDTO.CategoriesIDs = null;
+    this.sharingDataService.filterDTO.NamePart = null;
+    this.sharingDataService.filterDTO.PageNumber = 1;
+    this.sharingDataService.filterDTO.PriceFrom = null;
+    this.sharingDataService.filterDTO.PriceTO = null;
+    this.sharingDataService.filterDTO.SortingType = null;
+
+    this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/search-result', id]));
+  };
+
+  navigateToCartPage() {
+    this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/cart']));
+
+
+    $('.header-carticon').removeClass('is-active');
+    $('.header-minicart').slideToggle();
+
+
   };
 
   logout() {
@@ -71,8 +103,16 @@ export class HeaderComponent implements OnInit {
   };
 
   search() {
+
+    this.sharingDataService.filterDTO.CategoriesIDs = null;
+    this.sharingDataService.filterDTO.CategoryID = null;
+    this.sharingDataService.filterDTO.PageNumber = 1;
+    this.sharingDataService.filterDTO.PriceFrom = null;
+    this.sharingDataService.filterDTO.PriceTO = null;
+    this.sharingDataService.filterDTO.SortingType = null;
+
     this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
       this.router.navigate(['/search-result']));
-  }
+  };
 
 }

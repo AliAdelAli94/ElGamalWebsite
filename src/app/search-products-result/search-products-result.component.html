@@ -1,9 +1,28 @@
+<!-- Header Title -->
+<div class="header-tagsarea bg-grey">
+  <div class="container">
+    <div class="header-tags">
+      <h6>نتائج البحث :</h6>
+    </div>
+  </div>
+</div>
+<!-- Header Title -->
+
 <main class="page-content">
 
   <!-- Shop Page Area -->
   <div class="shop-page-area bg-white ptb-30">
     <div class="container">
-      <div class="row">
+
+      <div class="row" *ngIf="filteredData == null">
+        <div class="col-lg-12" style="text-align: center">
+
+            <h2>لا توجد نتائج بحث</h2>
+
+        </div>
+      </div>
+
+      <div class="row" *ngIf="filteredData">
         <div class="col-lg-9">
           <div class="shop-filters mt-30">
             <div class="shop-filters-viewmode">
@@ -16,8 +35,10 @@
                 <button class="select-sortby-current">وصل حديثاً</button>
 
                 <ul class="select-sortby-list dropdown-list">
-                  <li style="cursor: pointer;"><a (click)="changeSortingType($event,1)">السعر : من الأعلي إلي الأقل</a></li>
-                  <li style="cursor: pointer;"><a (click)="changeSortingType($event,2)">السعر : من الأقل إلي الأعلي</a></li>
+                  <li style="cursor: pointer;"><a (click)="changeSortingType($event,1)">السعر : من الأعلي إلي الأقل</a>
+                  </li>
+                  <li style="cursor: pointer;"><a (click)="changeSortingType($event,2)">السعر : من الأقل إلي الأعلي</a>
+                  </li>
                   <li style="cursor: pointer;"><a (click)="changeSortingType($event,3)">الأعلي تقييماً</a></li>
                 </ul>
 
@@ -35,12 +56,12 @@
                     <a class="hoproduct-thumb" [routerLink]="['/product-details',x.ID]">
                       <img class="hoproduct-frontimage" [src]="x.images[0].imageUrl" alt="product image">
                       <img class="hoproduct-backimage"
-                        [src]="(x.images[1].imageUrl) ? x.images[1].imageUrl : x.images[0].imageUrl"
-                        alt="product image">
+                        [src]="(x.images[1]) ? x.images[1].imageUrl : x.images[0].imageUrl" alt="product image">
                     </a>
                     <ul class="hoproduct-actionbox">
                       <li><a (click)="AddToCart(x.ID)"><i class="lnr lnr-cart"></i></a></li>
-                      <li><a [routerLink]="['/product-details',x.ID]" class="quickview-trigger"><i class="lnr lnr-eye"></i></a></li>
+                      <li><a [routerLink]="['/product-details',x.ID]" class="quickview-trigger"><i
+                            class="lnr lnr-eye"></i></a></li>
                       <li><a><i class="lnr lnr-heart"></i></a></li>
                     </ul>
 
@@ -69,14 +90,17 @@
           <div class="cr-pagination pt-30">
             <p>إظهار {{filteredData.NumberOfCurrentItems}} منتج من {{filteredData.NumberOfAllItems}} منتج</p>
             <ul>
-              <li style="cursor: pointer;" (click)="sharingDataService.filterDTO.PageNumber - 1" ng-disabled="sharingDataService.filterDTO.PageNumber == 1"><a><i class="ion ion-ios-arrow-forward"></i>
+              <li style="cursor: pointer;" (click)="sharingDataService.filterDTO.PageNumber - 1"
+                ng-disabled="sharingDataService.filterDTO.PageNumber == 1"><a><i class="ion ion-ios-arrow-forward"></i>
                   السابق</a></li>
 
-              <li style="cursor: pointer;" *ngFor="let page of filteredData.NumerOfPagesArray"  (click)="changePageNumber(page)"
+              <li style="cursor: pointer;" *ngFor="let page of filteredData.NumerOfPagesArray"
+                (click)="changePageNumber(page)"
                 [ngClass]="{'active': (sharingDataService.filterDTO.PageNumber == null && page == 1) || (sharingDataService.filterDTO.PageNumber == page)}">
                 <a>{{page}}</a></li>
 
-              <li style="cursor: pointer;" (click)="changePageNumber(sharingDataService.filterDTO.PageNumber + 1)"><a>التالي <i class="ion ion-ios-arrow-back"></i></a></li>
+              <li style="cursor: pointer;" (click)="changePageNumber(sharingDataService.filterDTO.PageNumber + 1)">
+                <a>التالي <i class="ion ion-ios-arrow-back"></i></a></li>
             </ul>
           </div>
 
@@ -92,13 +116,13 @@
                 <h5 class="widget-title">السعر</h5>
 
                 <div class="widget-filter-inner" dir="ltr">
-                  <div class="range-slider" data-range_min="0" data-cur_min="0" >
+                  <div class="range-slider" data-range_min="0" data-cur_min="0">
                     <div class="bar"></div>
                     <span class="range-slider-rightgrip"></span>
                     <span class="range-slider-leftgrip"></span>
                   </div>
                   <div class="single-widget-range-price">
-                      <span class="range-slider-rightlabel"></span> - <span class="range-slider-leftlabel"></span>
+                    <span class="range-slider-rightlabel"></span> - <span class="range-slider-leftlabel"></span>
                   </div>
                 </div>
 
@@ -132,3 +156,12 @@
   </div>
   <!--// Shop Page Area -->
 </main>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmAddNewItemModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center">لقد تم إضافة منتج جديد إلي العربة</div>
+    </div>
+  </div>
+</div>

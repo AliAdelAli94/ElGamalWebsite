@@ -38,23 +38,25 @@
               <div class="pdetails-pricebox">
                 <del class="oldprice">ج.م {{product.priceBefore}} </del>
                 <span class="price">ج.م {{product.priceAfter}}</span>
-                <span class="badge">Save {{product.discountPercentage}}</span>
+                <span class="badge">خصم {{product.discountPercentage}}</span>
               </div>
               <p>{{product.description}}</p>
 
               <div class="pdetails-categories">
                 <span>القسم :</span>
                 <ul>
-                  <li><a href="#">الهواتف</a></li>
+                  <li>{{product.parentCategoryName}}</li>
                 </ul>
               </div>
-              <div class="pdetails-tags">
-                <span>الكلمات الدالة : </span>
-                <ul>
-                  <li><a href="#">الهواتف</a></li>
-                  <li><a href="#">هواوي</a></li>
-                </ul>
+
+              <div class="pdetails-quantity">
+                <button class="ho-button" (click)="AddToCart(product.ID)">
+                  <i class="lnr lnr-cart"></i>&nbsp;
+                  <span> أضف إلي العربة </span>
+                </button>
               </div>
+            
+              
             </div>
           </div>
         </div>
@@ -163,3 +165,12 @@
       </div>
     </div>
   </div>
+
+   <!-- Modal -->
+ <div class="modal fade" id="confirmAddNewItemModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center">لقد تم إضافة منتج جديد إلي العربة</div>  
+    </div>
+  </div>
+</div>

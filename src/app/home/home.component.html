@@ -8,17 +8,7 @@
       <div class="row">
 
         <!-- Single Feature -->
-        <div class="col-lg-3 col-md-6 col-12">
-          <div class="featurebox">
-            <i class="flaticon-free-delivery"></i>
-            <h5>الشحن مجاني</h5>
-            <p>الشحن مجاني داخل القاهرة و الجيزة</p>
-          </div>
-        </div>
-        <!--// Single Feature -->
-
-        <!-- Single Feature -->
-        <div class="col-lg-3 col-md-6 col-12">
+        <div class="col-lg-4 col-md-6 col-12">
           <div class="featurebox">
             <i class="flaticon-24-hours"></i>
             <h5>الدعم الفني</h5>
@@ -28,7 +18,7 @@
         <!--// Single Feature -->
 
         <!-- Single Feature -->
-        <div class="col-lg-3 col-md-6 col-12">
+        <div class="col-lg-4 col-md-6 col-12">
           <div class="featurebox">
             <i class="flaticon-money-back"></i>
             <h5>إستبدال المنتج</h5>
@@ -38,7 +28,7 @@
         <!--// Single Feature -->
 
         <!-- Single Feature -->
-        <div class="col-lg-3 col-md-6 col-12">
+        <div class="col-lg-4 col-md-6 col-12">
           <div class="featurebox">
             <i class="flaticon-file"></i>
             <h5>شهادة ضمان</h5>
@@ -106,7 +96,7 @@
             <div class="hoproduct-image">
               <a class="hoproduct-thumb" [routerLink]="['/product-details',x.ID]">
                 <img class="hoproduct-frontimage" [src]="x.images[0].imageUrl" alt="product image">
-                <img class="hoproduct-backimage" [src]="x.images[1].imageUrl" alt="product image">
+                <img class="hoproduct-backimage" [src]="(x.images[1])?x.images[1].imageUrl:x.images[0].imageUrl" alt="product image">
               </a>
               <ul class="hoproduct-actionbox">
                 <li><a (click)="AddToCart(x.ID)"><i class="lnr lnr-cart"></i></a></li>
@@ -150,3 +140,13 @@
   </div>
   <!--// Newsletter Area -->
 </main>
+
+ <!-- Modal -->
+ <div class="modal fade" id="confirmAddNewItemModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body" style="text-align: center">لقد تم إضافة منتج جديد إلي العربة</div>  
+      </div>
+    </div>
+  </div>
+

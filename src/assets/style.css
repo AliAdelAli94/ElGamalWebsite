@@ -6003,6 +6003,7 @@ only screen and (max-width: 767px) {
 
 .header-tags {
   padding: 10px 0;
+  margin-top: 15px;
 }
 
 .header-tags h6 {
@@ -6194,6 +6195,8 @@ only screen and (max-width: 767px) {
 
 .header-2 .header-bottom {
   border-top: 1px solid #e5e5e5;
+  border-bottom : 1px solid #e5e5e5;
+
 }
 
 .header-2 .header-contactinfo a,
@@ -7255,7 +7258,6 @@ only screen and (max-width: 767px) {
 .quantity-select .qtybutton {
   position: absolute;
   height: 20.5px;
-  width: 24px;
   line-height: 1;
   cursor: pointer;
   border: 1px solid #e5e5e5;
@@ -8270,8 +8272,8 @@ h5.compare-product-name a:hover {
  * Footer
  */
 .footer-toparea {
-  padding-top: 30px;
-  padding-bottom: 60px;
+  padding-top: 10px;
+  padding-bottom: 20px;
   border-top: 1px solid #e5e5e5;
 }
 

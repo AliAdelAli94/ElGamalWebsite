@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 declare function IntializeWebsiteJS(): any;
 declare function IntializeRangeSlider(): any;
+declare var $: any;
 
 @Component({
   selector: 'app-search-products-result',
@@ -20,9 +21,9 @@ export class SearchProductsResultComponent implements AfterViewInit, OnInit {
 
   filteredData: FilteredProductsDTO = new FilteredProductsDTO();
 
-  constructor(private dbManipulationService: DbManipulationService, 
-    public sharingDataService: SharingDataService,private spinnerService : SpinnerServieService, 
-    private _routeParams : ActivatedRoute) { }
+  constructor(private dbManipulationService: DbManipulationService,
+    public sharingDataService: SharingDataService, private spinnerService: SpinnerServieService,
+    private _routeParams: ActivatedRoute) { }
 
   ngAfterViewInit() {
     IntializeWebsiteJS();
@@ -30,7 +31,7 @@ export class SearchProductsResultComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     let categoryID = this._routeParams.snapshot.params['categoryID'];
-    if(categoryID){
+    if (categoryID) {
       this.sharingDataService.filterDTO.CategoryID = categoryID;
     }
     this.getFilteredProducts();
@@ -46,33 +47,38 @@ export class SearchProductsResultComponent implements AfterViewInit, OnInit {
   }
 
   getFilteredProducts() {
-    
+
     this.spinnerService.showSpinner();
     this.dbManipulationService.GetFilteredProducts(this.sharingDataService.filterDTO).subscribe(response => {
       this.filteredData = response;
-      this.filteredData.Products.forEach(x => {
-        if (x.rate == null) {
-          x.rateArray = new Array();
-        }
-        else {
-          x.rateArray = new Array(x.rate);
-        }
-      });
+      if (this.filteredData) {
+        this.filteredData.Products.forEach(x => {
+          if (x.rate == null) {
+            x.rateArray = new Array();
+          }
+          else {
+            x.rateArray = new Array(x.rate);
+          }
+        });
 
-      this.sharingDataService.filterDTO.PageNumber = (this.sharingDataService.filterDTO.PageNumber == null || this.sharingDataService.filterDTO.PageNumber == 0) ? 1 : this.sharingDataService.filterDTO.PageNumber;
-      this.filteredData.NumerOfPagesArray = Array(this.filteredData.NumerOfPages).fill(0).map((x, i) => i + 1);
-      let sliderHtml = document.getElementsByClassName("range-slider")[0];
-      sliderHtml.setAttribute("data-cur_max", this.filteredData.MaxPriceValue);
-      sliderHtml.setAttribute("data-range_max", this.filteredData.MaxPriceValue);
+        this.sharingDataService.filterDTO.PageNumber = (this.sharingDataService.filterDTO.PageNumber == null || this.sharingDataService.filterDTO.PageNumber == 0) ? 1 : this.sharingDataService.filterDTO.PageNumber;
+        this.filteredData.NumerOfPagesArray = Array(this.filteredData.NumerOfPages).fill(0).map((x, i) => i + 1);
+        let sliderHtml = (document.getElementsByClassName("range-slider")) ? (document.getElementsByClassName("range-slider"))[0] : null;
+        if (sliderHtml) {
+          sliderHtml.setAttribute("data-cur_max", this.filteredData.MaxPriceValue);
+          sliderHtml.setAttribute("data-range_max", this.filteredData.MaxPriceValue);
+        }
 
-      IntializeRangeSlider();
-    },()=>{},()=>{
+        IntializeRangeSlider();
+      }
+    }, () => { }, () => {
       this.spinnerService.hideSpinner();
     });
+
   }
 
   changeSortingType(event: any, val: number) {
-    
+
     this.sharingDataService.filterDTO.SortingType = val;
     document.getElementsByClassName("select-sortby-current")[0].innerHTML = event.currentTarget.innerHTML;
 
@@ -110,6 +116,9 @@ export class SearchProductsResultComponent implements AfterViewInit, OnInit {
     cardData.totalPrice = cardData.shipingPrice + cardData.productsPrice;
 
     this.sharingDataService.setCardData(cardData);
+
+    $('#confirmAddNewItemModal').modal('show');
+
 
   }
 

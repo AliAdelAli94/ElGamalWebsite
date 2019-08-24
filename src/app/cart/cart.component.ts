@@ -3,6 +3,7 @@ import { CardDTO } from '../models/CardDTO.model';
 import { SharingDataService } from '../services/sharing-data.service';
 
 declare function IntializeWebsiteJS(): any;
+declare var $ : any;
 
 @Component({
   selector: 'app-cart',
@@ -27,5 +28,41 @@ export class CartComponent {
     });
   };
 
+  deleteCartItem(productId : string){
+
+    this.cardData.productsPrice = 0;
+    let productIndex = this.cardData.selectedProducts.findIndex(x => x.ID == productId);
+    if(productIndex != -1){
+      this.cardData.selectedProducts.splice(productIndex,1);
+    }
+    this.cardData.selectedProducts.forEach(x => {
+      this.cardData.productsPrice = this.cardData.productsPrice + (x.priceAfter * x.NumberOfItems);
+    });
+
+    this.cardData.shipingPrice = 0.0;
+    this.cardData.totalPrice = this.cardData.shipingPrice + this.cardData.productsPrice;
+
+    this.sharingDataService.setCardData(this.cardData);
+    $('#confirmDeleteItemModal').modal('show');
+  };
+
+  addCartItem(productId : string, change : number){
+
+    this.cardData.productsPrice = 0;
+    let productIndex = this.cardData.selectedProducts.findIndex(x => x.ID == productId);
+    if(productIndex != -1){
+      let item = this.cardData.selectedProducts[productIndex];
+      item.NumberOfItems = item.NumberOfItems + change;
+    }
+    this.cardData.selectedProducts.forEach(x => {
+      this.cardData.productsPrice = this.cardData.productsPrice + (x.priceAfter * x.NumberOfItems);
+    });
+
+    this.cardData.shipingPrice = 0.0;
+    this.cardData.totalPrice = this.cardData.shipingPrice + this.cardData.productsPrice;
+
+    this.sharingDataService.setCardData(this.cardData);
+    $('#confirmEditItemModal').modal('show');
+  };
 
 }

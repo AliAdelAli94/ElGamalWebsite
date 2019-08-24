@@ -15,7 +15,6 @@
                     alt="us icon">العربية</button>
                 <ul class="select-language-list dropdown-list">
                   <li><a [routerLink]="['/home']" ><img src="assets/images/icons/eg.png" alt="eg icon">العربية</a></li>
-                  <li><a [routerLink]="['/home']" ><img src="assets/images/icons/us.png" alt="us icon">English</a></li>
                 </ul>
               </div>
             </div>
@@ -70,8 +69,8 @@
                 </ul>
               </div>
 
-              <div class="header-cart" *ngIf="CardHasDataFlag == true">
-                <a class="header-carticon" href=""><i class="lnr lnr-cart"></i><span
+              <div class="header-cart" [style.display]="CardHasDataFlag == false ?'none': 'inline'">
+                <a class="header-carticon" [routerLink]="[this.router.url]"><i class="lnr lnr-cart"></i><span
                     class="count">{{cardData.selectedProducts.length}}</span></a>
 
                 <!-- Minicart -->
@@ -89,8 +88,6 @@
                         <h6><a>{{x.name}}</a></h6>
                         <span class="minicart-productprice">{{x.priceAfter}} ج.م</span>
                       </div>
-                      <button class="minicart-productclose"><i
-                          class="ion ion-ios-close-circle"></i></button>
                     </div>
 
                   </div>
@@ -100,16 +97,16 @@
                     <li>الإجمالي <span>{{cardData.totalPrice}} ج.م</span></li>
                   </ul>
                   <div class="minicart-footer">
-                      <a [routerLink]="['/cart']" class="ho-button ho-button-fullwidth">
+                      <a (click)="navigateToCartPage()" class="ho-button ho-button-fullwidth">
                       <span>عربة التسوق</span>
                     </a>
-                    <a [routerLink]="['/checkout']"
+                    <a (click)="navigateToCompleteOrder()"
                       class="ho-button ho-button-dark ho-button-fullwidth">
                       <span>إستكمال الطلب</span>
                     </a>
                   </div>
                 </div>
-                <!--// Minicart -->
+                <!--// Minicart -->)
 
               </div>
 
@@ -134,12 +131,12 @@
               </button>
               <nav class="catmenu-body">
                 <ul>
-                  <li class="catmenu-dropdown" *ngFor="let x of categories"><a><i
+                  <li class="catmenu-dropdown" *ngFor="let x of categories" style="cursor: pointer;"><a (click)="navigateToSearchProductsPage(x.ID)" ><i
                         class="ion ion-ios-desktop"></i>{{x.name}}</a>
                     <ul class="megamenu catmenu-megamenu">
                       <li><a>الأقسام الفرعية</a>
                         <ul>
-                          <li><a *ngFor="let z of x.childCategories" [routerLink]="['/search-result',z.ID]">{{z.name}}</a></li>
+                          <li><a *ngFor="let z of x.childCategories" (click)="navigateToSearchProductsPage(z.ID)" >{{z.name}}</a></li>
                           <li *ngIf="!x.childCategories || x.childCategories.length==0">
                             <h5>لا توجد أقسام فرعية</h5>
                           </li>
@@ -193,24 +190,6 @@
       </div>
     </div>
     <!--// Header Bottom Area -->
-
-    <!-- Header Hot Tags -->
-    <div class="header-tagsarea bg-grey">
-      <div class="container">
-        <div class="header-tags">
-          <h6>الأكثر شيوعا : </h6>
-          <ul>
-            <li><a href="#">لابتوب</a></li>
-            <li><a href="#">ساعات ذكية</a></li>
-            <li><a href="#">سماعات</a></li>
-            <li><a href="#">اكسسوارات</a></li>
-            <li><a href="#">هواتف و تابلت</a></li>
-            <li><a href="#">الكترونيات</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <!--// Header Hot Tags -->
 
   </header>
   <!--// Header -->

@@ -6,6 +6,10 @@ import { CommentDTO } from '../models/CommentDTO.model';
 import { CookieService } from 'ngx-cookie';
 import { NgForm } from '@angular/forms';
 import { SpinnerServieService } from '../services/spinner-servie.service';
+import { SharingDataService } from '../services/sharing-data.service';
+import { CardDTO } from '../models/CardDTO.model';
+import { ProductDTO } from '../models/ProductDTO.model';
+import { parse } from 'path';
 
 
 declare function IntializeWebsiteJS(): any;
@@ -26,7 +30,8 @@ export class ProductDetailsComponent implements AfterViewInit {
 
 
   constructor(private dbManipulationService: DbManipulationService,
-    private _activatedRoute: ActivatedRoute, private cookieService: CookieService, private spinnerServieService: SpinnerServieService,private router : Router) { }
+    private _activatedRoute: ActivatedRoute, private cookieService: CookieService,
+    private spinnerServieService: SpinnerServieService, private router: Router, private sharingDataService: SharingDataService) { }
 
   ngOnInit() {
     let userData = JSON.parse(this.cookieService.get("userData"));
@@ -71,6 +76,51 @@ export class ProductDetailsComponent implements AfterViewInit {
         this.spinnerServieService.hideSpinner();
       });
     }
+
+  }
+
+
+  AddToCart(productID: string) {
+    let cardData: CardDTO = new CardDTO();
+    cardData = JSON.parse(this.sharingDataService.getCardData());
+
+    let existedProduct: ProductDTO[] = new Array();
+    existedProduct = cardData.selectedProducts.filter(x => x.ID == productID);
+    if (existedProduct.length > 0) {
+      existedProduct[0].NumberOfItems = existedProduct[0].NumberOfItems + 1;
+    }
+    else {
+      
+      let selectedProduct: ProductDTO = new ProductDTO();
+      selectedProduct.ID = this.product.ID;
+      selectedProduct.ProductOptions = this.product.ProductOptions;
+      selectedProduct.categoryID = this.product.categoryID;
+      selectedProduct.NumberOfItems = 1;
+      selectedProduct.description = this.product.description;
+      selectedProduct.discountPercentage = this.product.discountPercentage;
+      selectedProduct.images = this.product.images;
+      selectedProduct.name = this.product.name;
+      selectedProduct.parentCategoryName = this.product.parentCategoryName;
+      selectedProduct.priceAfter = parseFloat(this.product.priceAfter);
+      selectedProduct.priceBefore = parseFloat(this.product.priceBefore);
+      selectedProduct.rate = this.product.rate;
+
+      cardData.selectedProducts.push(selectedProduct);
+
+    }
+
+    cardData.productsPrice = 0;
+    cardData.selectedProducts.forEach(x => {
+      cardData.productsPrice = cardData.productsPrice + (x.priceAfter * x.NumberOfItems);
+    });
+
+    cardData.shipingPrice = 0.0;
+    cardData.totalPrice = cardData.shipingPrice + cardData.productsPrice;
+
+    this.sharingDataService.setCardData(cardData);
+
+    $('#confirmAddNewItemModal').modal('show');
+
 
   }
 

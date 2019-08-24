@@ -9,7 +9,7 @@ export class GetProductById
     priceBefore?: string;
     priceAfter?: string;
     description: string;
-    rate: string;
+    rate: number;
     categoryID?: string;
     parentCategoryName: string;
     discountPercentage: string;
