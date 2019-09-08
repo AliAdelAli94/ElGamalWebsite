@@ -61,6 +61,10 @@ export class SearchProductsResultComponent implements AfterViewInit, OnInit {
           }
         });
 
+        if(this.filteredData.Products.length == 0){
+          $('#dataPlaceHolder')[0].style.display = 'none';
+        }
+
         this.sharingDataService.filterDTO.PageNumber = (this.sharingDataService.filterDTO.PageNumber == null || this.sharingDataService.filterDTO.PageNumber == 0) ? 1 : this.sharingDataService.filterDTO.PageNumber;
         this.filteredData.NumerOfPagesArray = Array(this.filteredData.NumerOfPages).fill(0).map((x, i) => i + 1);
         let sliderHtml = (document.getElementsByClassName("range-slider")) ? (document.getElementsByClassName("range-slider"))[0] : null;
@@ -70,9 +74,12 @@ export class SearchProductsResultComponent implements AfterViewInit, OnInit {
         }
 
         IntializeRangeSlider();
+
       }
     }, () => { }, () => {
       this.spinnerService.hideSpinner();
+
+
     });
 
   }

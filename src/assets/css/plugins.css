@@ -4306,6 +4306,12 @@
     content: "\f106"
 }
 
+.flaticon-null:before { content: "\f108"; }
+
+.flaticon-truck:before { content: "\f107"; }
+
+
+.flaticon-money-back:before { content: "\f101"; }
 
 /* Niceselect */
 

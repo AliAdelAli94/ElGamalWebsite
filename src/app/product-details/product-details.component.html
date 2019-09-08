@@ -9,7 +9,7 @@
           <div class="col-lg-6">
             <div class="pdetails-images">
               <div class="pdetails-largeimages pdetails-imagezoom">
-                <div class="pdetails-singleimage"
+                <div class="pdetails-singleimage" [attr.data-src]="x.imageUrl"
                   *ngFor="let x of product.images">
                   <img [src]="x.imageUrl" alt="product image">
                 </div>

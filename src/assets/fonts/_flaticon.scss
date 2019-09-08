@@ -1,6 +1,6 @@
     /*
     Flaticon icon font: Flaticon
-    Creation date: 14/02/2019 18:16
+    Creation date: 08/09/2019 22:21
     */
 
     @font-face {
@@ -44,6 +44,8 @@
 .flaticon-support:before { content: "\f104"; }
 .flaticon-menu:before { content: "\f105"; }
 .flaticon-multiply:before { content: "\f106"; }
+.flaticon-truck:before { content: "\f107"; }
+.flaticon-null:before { content: "\f108"; }
     
     $font-Flaticon-file: "\f100";
     $font-Flaticon-money-back: "\f101";
@@ -52,3 +54,5 @@
     $font-Flaticon-support: "\f104";
     $font-Flaticon-menu: "\f105";
     $font-Flaticon-multiply: "\f106";
+    $font-Flaticon-truck: "\f107";
+    $font-Flaticon-null: "\f108";

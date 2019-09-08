@@ -14,7 +14,7 @@
   <div class="shop-page-area bg-white ptb-30">
     <div class="container">
 
-      <div class="row" *ngIf="filteredData == null">
+      <div class="row" *ngIf="filteredData.Products.length == 0">
         <div class="col-lg-12" style="text-align: center">
 
             <h2>لا توجد نتائج بحث</h2>
@@ -22,7 +22,7 @@
         </div>
       </div>
 
-      <div class="row" *ngIf="filteredData">
+      <div class="row" id="dataPlaceHolder">
         <div class="col-lg-9">
           <div class="shop-filters mt-30">
             <div class="shop-filters-viewmode">
