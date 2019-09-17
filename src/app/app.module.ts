@@ -20,6 +20,8 @@ import { FormsModule } from '@angular/forms';
 import { CookieService, CookieModule } from 'ngx-cookie';
 import { SharingDataService } from './services/sharing-data.service';
 import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { HowWeAreComponent } from './how-we-are/how-we-are.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
     OrderDetailsComponent,
     SearchProductsResultComponent,
     notfound,
-    ConfirmOrderComponent
+    ConfirmOrderComponent,
+    AboutUsComponent,
+    HowWeAreComponent
   ],
   imports: [
     BrowserModule,

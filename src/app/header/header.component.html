@@ -1,129 +1,130 @@
-	<!-- Header -->
-  <header class="header header-2">
+<!-- Header -->
+<header class="header header-2">
 
-    <!-- Header Top Area -->
-    <div class="header-top bg-theme">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-7 col-md-7 col-sm-7 col-12">
-            <p class="header-welcomemsg">أهلا بكم <span>في متجر الجمل !</span></p>
-          </div>
-          <div class="col-lg-5 col-md-5 col-sm-5 col-12">
-            <div class="header-langcurr">
-              <div class="select-language">
-                <button class="select-language-current"><img src="assets/images/icons/eg.png"
-                    alt="us icon">العربية</button>
-                <ul class="select-language-list dropdown-list">
-                  <li><a [routerLink]="['/home']" ><img src="assets/images/icons/eg.png" alt="eg icon">العربية</a></li>
-                </ul>
-              </div>
+  <!-- Header Top Area -->
+  <div class="header-top bg-theme">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-7 col-md-7 col-sm-7 col-12">
+          <p class="header-welcomemsg">أهلا بكم <span>في متجر الجمل !</span></p>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5 col-12">
+          <div class="header-langcurr">
+            <div class="select-language">
+              <button class="select-language-current"><img src="assets/images/icons/eg.png"
+                  alt="us icon">العربية</button>
+              <ul class="select-language-list dropdown-list">
+                <li><a [routerLink]="['/home']"><img src="assets/images/icons/eg.png" alt="eg icon">العربية</a></li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!--// Header Top Area -->
+  </div>
+  <!--// Header Top Area -->
 
-    <!-- Header Middle Area -->
-    <div class="header-middle bg-white">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-3 col-md-6 col-sm-6 order-1 order-lg-1">
-            <a class="header-logo">
-              <img src="assets/images/logo/logo.png" alt="logo">
-            </a>
-          </div>
-          
-          <div class="col-lg-6 col-12 order-3 order-lg-2">
-            <form class="header-searchbox" role="form" #searchForm="ngForm">
+  <!-- Header Middle Area -->
+  <div class="header-middle bg-white">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-3 col-md-6 col-sm-6 order-1 order-lg-1">
+          <a class="header-logo">
+            <img src="assets/images/logo/logo.png" alt="logo">
+          </a>
+        </div>
 
-              <input type="text" name="searchName" [(ngModel)]="sharingDataService.filterDTO.NamePart"
+        <div class="col-lg-6 col-12 order-3 order-lg-2">
+          <form class="header-searchbox" role="form" #searchForm="ngForm">
+
+            <input type="text" name="searchName" [(ngModel)]="sharingDataService.filterDTO.NamePart"
               #searchNameControl="ngModel" placeholder="إكتب كلمة البحث الخاصة بك ...">
 
-              <button type="submit" (click)="search()"><i class="lnr lnr-magnifier"></i></button>
+            <button type="submit" (click)="search()"><i class="lnr lnr-magnifier"></i></button>
 
-            </form>
-          </div>
+          </form>
+        </div>
 
-          <div class="col-lg-3 col-md-6 col-sm-6 order-2 order-lg-3">
-            <div class="header-icons">
-              <div class="header-account">
-                <button class="header-accountbox-trigger"><span class="lnr lnr-user"></span> {{(loggedInFlag == true)?userDto.userName:'حسابي'}}
-                  <i class="ion ion-ios-arrow-down"></i></button>
-                <ul class="header-accountbox dropdown-list">
-                  <li *ngIf="loggedInFlag == true">
-                    <a (click) = "navigateToMyaccountPage(2)">تعديل الحساب</a>
-                  </li>
-                  <li *ngIf="loggedInFlag == true">
-                    <a (click) = "navigateToMyaccountPage(3)">المفضلة</a>
-                  </li>
-                  <li *ngIf="loggedInFlag == true">
-                    <a (click) = "navigateToMyaccountPage(1)">طلباتي</a>
-                  </li>
-                  <li *ngIf="loggedInFlag == false">
-                    <a [routerLink]="['/login-register']">تسجيل الدخول</a>
-                  </li>
-                  <li *ngIf="loggedInFlag == true">
-                      <a (click)="logout()" style="cursor:pointer">تسجيل الخروج</a>
-                    </li>
-                </ul>
-              </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 order-2 order-lg-3">
+          <div class="header-icons">
+            <div class="header-account">
+              <button class="header-accountbox-trigger"><span class="lnr lnr-user"></span>
+                {{(loggedInFlag == true)?userDto.userName:'حسابي'}}
+                <i class="ion ion-ios-arrow-down"></i></button>
+              <ul class="header-accountbox dropdown-list">
+                <li *ngIf="loggedInFlag == true">
+                  <a (click)="navigateToMyaccountPage(2)">تعديل الحساب</a>
+                </li>
+                <li *ngIf="loggedInFlag == true">
+                  <a (click)="navigateToMyaccountPage(3)">المفضلة</a>
+                </li>
+                <li *ngIf="loggedInFlag == true">
+                  <a (click)="navigateToMyaccountPage(1)">طلباتي</a>
+                </li>
+                <li *ngIf="loggedInFlag == false">
+                  <a [routerLink]="['/login-register']">تسجيل الدخول</a>
+                </li>
+                <li *ngIf="loggedInFlag == true">
+                  <a (click)="logout()" style="cursor:pointer">تسجيل الخروج</a>
+                </li>
+              </ul>
+            </div>
 
-              <div class="header-cart" [style.display]="CardHasDataFlag == false ?'none': 'inline'">
-                <a class="header-carticon" [routerLink]="[this.router.url]"><i class="lnr lnr-cart"></i><span
-                    class="count">{{cardData.selectedProducts.length}}</span></a>
+            <div class="header-cart" [style.display]="CardHasDataFlag == false ?'none': 'inline'">
+              <a class="header-carticon" [routerLink]="[this.router.url]"><i class="lnr lnr-cart"></i><span
+                  class="count">{{cardData.selectedProducts.length}}</span></a>
 
-                <!-- Minicart -->
-                <div class="header-minicart minicart">
-                  <div class="minicart-header">
+              <!-- Minicart -->
+              <div class="header-minicart minicart">
+                <div class="minicart-header">
 
-                    <div class="minicart-product" *ngFor="let x of cardData.selectedProducts">
-                      <div class="minicart-productimage">
-                        <a>
-                          <img [src]="x.images[0].imageUrl" alt="product image">
-                        </a>
-                        <span class="minicart-productquantity">{{x.NumberOfItems}}x</span>
-                      </div>
-                      <div class="minicart-productcontent">
-                        <h6><a>{{x.name}}</a></h6>
-                        <span class="minicart-productprice">{{x.priceAfter}} ج.م</span>
-                      </div>
+                  <div class="minicart-product" *ngFor="let x of cardData.selectedProducts">
+                    <div class="minicart-productimage">
+                      <a>
+                        <img [src]="x.images[0].imageUrl" alt="product image">
+                      </a>
+                      <span class="minicart-productquantity">{{x.NumberOfItems}}x</span>
                     </div>
+                    <div class="minicart-productcontent">
+                      <h6><a>{{x.name}}</a></h6>
+                      <span class="minicart-productprice">{{x.priceAfter}} ج.م</span>
+                    </div>
+                  </div>
 
-                  </div>
-                  <ul class="minicart-pricing">
-                    <li>قيمة المنتجات <span>{{cardData.productsPrice}} ج.م</span></li>
-                    <li>قيمة التوصيل <span>{{cardData.shipingPrice}} ج.م</span></li>
-                    <li>الإجمالي <span>{{cardData.totalPrice}} ج.م</span></li>
-                  </ul>
-                  <div class="minicart-footer">
-                      <a (click)="navigateToCartPage()" class="ho-button ho-button-fullwidth">
-                      <span>عربة التسوق</span>
-                    </a>
-                    <a (click)="navigateToCompleteOrder()"
-                      class="ho-button ho-button-dark ho-button-fullwidth">
-                      <span>إستكمال الطلب</span>
-                    </a>
-                  </div>
                 </div>
-                <!--// Minicart -->)
-
+                <ul class="minicart-pricing">
+                  <li>قيمة المنتجات <span>{{cardData.productsPrice}} ج.م</span></li>
+                  <li>قيمة التوصيل <span>{{cardData.shipingPrice}} ج.م</span></li>
+                  <li>الإجمالي <span>{{cardData.totalPrice}} ج.م</span></li>
+                </ul>
+                <div class="minicart-footer">
+                  <a (click)="navigateToCartPage()" class="ho-button ho-button-fullwidth">
+                    <span>عربة التسوق</span>
+                  </a>
+                  <a (click)="navigateToCompleteOrder()" class="ho-button ho-button-dark ho-button-fullwidth">
+                    <span>إستكمال الطلب</span>
+                  </a>
+                </div>
               </div>
+              <!--// Minicart -->)
 
             </div>
-          </div>
 
+          </div>
         </div>
+
       </div>
     </div>
-    <!--// Header Middle Area -->
+  </div>
+  <!--// Header Middle Area -->
 
-    <!-- Header Bottom Area -->
-    <div class="header-bottom bg-white">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-10 col-md-5 col-sm-5">
+  <!-- Header Bottom Area -->
+  <div class="header-bottom bg-white">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-10 col-md-5 col-sm-5">
 
+          <div class="col-lg-4 col-md-3 col-sm-3" style="float: right;">
             <!-- Category Menu -->
             <div class="header-catmenu catmenu">
               <button class="catmenu-trigger">
@@ -131,12 +132,13 @@
               </button>
               <nav class="catmenu-body">
                 <ul>
-                  <li class="catmenu-dropdown" *ngFor="let x of categories" style="cursor: pointer;"><a (click)="navigateToSearchProductsPage(x.ID)" ><i
-                        class="ion ion-ios-desktop"></i>{{x.name}}</a>
+                  <li class="catmenu-dropdown" *ngFor="let x of categories" style="cursor: pointer;"><a
+                      (click)="navigateToSearchProductsPage(x.ID)"><i class="ion ion-ios-desktop"></i>{{x.name}}</a>
                     <ul class="megamenu catmenu-megamenu">
                       <li><a>الأقسام الفرعية</a>
                         <ul>
-                          <li><a *ngFor="let z of x.childCategories" (click)="navigateToSearchProductsPage(z.ID)" >{{z.name}}</a></li>
+                          <li><a *ngFor="let z of x.childCategories"
+                              (click)="navigateToSearchProductsPage(z.ID)">{{z.name}}</a></li>
                           <li *ngIf="!x.childCategories || x.childCategories.length==0">
                             <h5>لا توجد أقسام فرعية</h5>
                           </li>
@@ -148,7 +150,8 @@
               </nav>
             </div>
             <!--// Category Menu -->
-
+          </div>
+          <div class="col-lg-8 col-md-9 col-sm-9" style="text-align: center;float: right;">
             <!-- Navigation -->
             <nav class="ho-navigation ho-navigation-2">
               <ul>
@@ -157,39 +160,32 @@
                 </li>
 
                 <li>
-                  <a [routerLink]="['/order-details']">عروض الجمل</a>
+                  <a [routerLink]="['/How-We-Are']">من نحن</a>
                 </li>
 
                 <li>
-                  <a href="about-us.html">من نحن</a>
+                  <a [routerLink]="['/About-Us']"> اتصل بنا</a>
                 </li>
 
-                <li>
-                  <a href="#">أخبار الجمل</a>
-                </li>
-
-                <li>
-                  <a href="contact.html"> اتصل بنا</a>
-                </li>
               </ul>
             </nav>
             <!--// Navigation -->
-
           </div>
-          <div class="col-lg-2 col-md-5 col-sm-5">
-            <div class="header-contactinfo">
-              <i class="flaticon-support"></i>
-              <span>اتصل بنا الأن :</span>
-              <a href="tel:+01148444018">01148444018</a>
-            </div>
+        </div>
+        <div class="col-lg-2 col-md-5 col-sm-5">
+          <div class="header-contactinfo">
+            <i class="flaticon-support"></i>
+            <span>اتصل بنا الأن :</span>
+            <a href="tel:+01148444018">01148444018</a>
           </div>
-          <div class="col-12 d-block d-lg-none">
-            <div class="mobile-menu clearfix"></div>
-          </div>
+        </div>
+        <div class="col-12 d-block d-lg-none">
+          <div class="mobile-menu clearfix"></div>
         </div>
       </div>
     </div>
-    <!--// Header Bottom Area -->
+  </div>
+  <!--// Header Bottom Area -->
 
-  </header>
-  <!--// Header -->
+</header>
+<!--// Header -->

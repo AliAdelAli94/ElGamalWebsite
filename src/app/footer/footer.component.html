@@ -19,14 +19,25 @@
           </div>
         </div>
 
-        <div class="col-lg-2 col-md-4">
+        <div class="col-lg-2 col-md-4" *ngIf="this.sharingDataService.loggedIn == true">
           <div class="footer-widget widget-links">
             <h5 class="footer-widget-title">حسابي</h5>
             <ul>
-              <li><a href="#">تعديل الحساب</a></li>
-              <li><a href="#">المفضلة</a></li>
-              <li><a href="#">طلباتي</a></li>
-              <li><a href="#">نسجيل الدخول</a></li>
+              <li>
+                <a (click)="navigateToMyaccountPage(2)">تعديل الحساب</a>
+              </li>
+              <li>
+                <a (click)="navigateToMyaccountPage(3)">المفضلة</a>
+              </li>
+              <li>
+                <a (click)="navigateToMyaccountPage(1)">طلباتي</a>
+              </li>
+              <li *ngIf="loggedInFlag == false">
+                <a [routerLink]="['/login-register']">تسجيل الدخول</a>
+              </li>
+              <li>
+                <a (click)="logout()" style="cursor:pointer">تسجيل الخروج</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -35,28 +46,23 @@
           <div class="footer-widget widget-links">
             <h5 class="footer-widget-title">للتواصل معنا</h5>
             <ul>
-              <li><a href="#">الرئيسية</a></li>
+              <li>
+                <a [routerLink]="['/How-We-Are']">من نحن</a>
+              </li>
 
-              <li><a href="#">اتصل بنا</a></li>
-              <li><a href="#">من نحن</a></li>
-              <li><a href="#">أخبار الجمل</a></li>
+              <li>
+                <a [routerLink]="['/About-Us']"> اتصل بنا</a>
+              </li>
             </ul>
           </div>
         </div>
 
-        <div class="col-lg-2 col-md-4">
-          <div class="footer-widget widget-links">
-            <h5 class="footer-widget-title">الحقوق و السياسات</h5>
-            <ul>
-              <li><a href="#">سياية إرجاع المنتجات</a></li>
-            </ul>
-          </div>
-        </div>
 
         <div class="col-lg-3 col-md-4">
           <div class="newsletter-socialicons socialicons socialicons-radial">
             <ul>
-              <li><a href="https://www.facebook.com/elgammalshop/" target="_blank"><i class="ion ion-logo-facebook"></i></a></li>
+              <li><a href="https://www.facebook.com/elgammalshop/" target="_blank"><i
+                    class="ion ion-logo-facebook"></i></a></li>
               <li><a href="#"><i class="ion ion-logo-instagram"></i></a></li>
             </ul>
           </div>

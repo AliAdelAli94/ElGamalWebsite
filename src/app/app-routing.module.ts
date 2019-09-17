@@ -12,6 +12,8 @@ import { SearchProductsResultComponent } from './search-products-result/search-p
 import { notfound } from './not-found/not-found.component';
 import { AuthGuard } from './auth.guard';
 import { ConfirmOrderComponent } from './confirm-order/confirm-order.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { HowWeAreComponent } from './how-we-are/how-we-are.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -25,6 +27,8 @@ const routes: Routes = [
   {path:'search-result',component:SearchProductsResultComponent},
   {path:'search-result/:categoryID',component:SearchProductsResultComponent},
   {path:'confirm-order',component:ConfirmOrderComponent},
+  {path:'About-Us',component:AboutUsComponent},
+  {path:'How-We-Are',component:HowWeAreComponent},
   {path:'**',component:notfound}
 ];
 

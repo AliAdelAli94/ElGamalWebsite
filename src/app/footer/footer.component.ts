@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SharingDataService } from '../services/sharing-data.service';
+import { UserDTO } from '../models/UserDTO.model';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  userDto : UserDTO;
+
+  constructor(public sharingDataService: SharingDataService, public router: Router) { 
+    this.userDto = new UserDTO();
+    
+  }
 
   ngOnInit() {
   }
+
+
+  navigateToMyaccountPage(id:number) {
+    this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/my-account',id]));
+  };
 
 }

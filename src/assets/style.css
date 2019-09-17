@@ -6207,7 +6207,6 @@ only screen and (max-width: 767px) {
 }
 
 .header-2 .header-catmenu {
-  float: right;
   margin-top: 10px;
 }
 
@@ -6547,10 +6546,6 @@ only screen and (max-width: 767px) {
 .ho-navigation-2 ul li a:hover,
 .ho-navigation-3 ul li a:hover {
   color: #0B88EE;
-}
-
-.ho-navigation-2 {
-  float: right;
 }
 
 .ho-navigation-3 {
