@@ -1,125 +1,78 @@
 <main class="page-content">
 
-  <!-- Shopping Cart Area -->
-  <div class="cart-page-area ptb-30 bg-white">
-      <div class="container">
+    <!-- Shopping Cart Area -->
+    <div class="cart-page-area ptb-30 bg-white" *ngIf="orderDetails.OrderDetails.length > 0">
+        <div class="container">
 
-          <!-- Cart Products -->
-          <div class="cart-table table-responsive">
-              <table class="table table-bordered table-hover mb-0">
-                  <thead>
-                      <tr>
-                          <th class="cart-column-image" scope="col">صورة المنتج</th>
-                          <th class="cart-column-productname" scope="col">إسم المنتج</th>
-                          <th class="cart-column-price" scope="col">السعر</th>
-                          <th class="cart-column-quantity" scope="col">الكمية</th>
-                          <th class="cart-column-total" scope="col">الإجمالي</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr>
-                          <td>
-                              <a href="product-details.html" class="product-image">
-                                  <img src="assets/images/products/product1-2.jpg" alt="product image">
-                              </a>
-                          </td>
-                          <td>
-                              <a href="product-details-right-sidebar.html" class="product-title">هواوي ميت10
-                                  لايت,شريحتين اتصال,تخزين حتي 64,رامات4,كاميراامامية16+2</a>
-                          </td>
-                          <td>ج.م 75.00</td>
-                          <td>
-                              <div class="quantity-select">
-                                  <input type="text" value="1">
-                                  <div class="inc qtybutton">+<i class="ion ion-ios-arrow-up"></i></div>
-                                  <div class="dec qtybutton">-<i class="ion ion-ios-arrow-down"></i></div>
-                              </div>
-                          </td>
-                          <td>
-                              <span class="total-price">ج.م 75.00</span>
-                          </td>
-                      </tr>
-                      <tr>
-                          <td>
-                              <a href="product-details.html" class="product-image">
-                                  <img src="assets/images/products/product1.jpg" alt="product image">
-                              </a>
-                          </td>
-                          <td>
-                              <a href="product-details-right-sidebar.html" class="product-title">هواوي ميت10
-                                  لايت,شريحتين اتصال,تخزين حتي 64,رامات4,كاميراامامية16+2</a>
-                          </td>
-                          <td>ج.م 75.00</td>
-                          <td>
-                              <div class="quantity-select">
-                                  <input type="text" value="1">
-                                  <div class="inc qtybutton">+<i class="ion ion-ios-arrow-up"></i></div>
-                                  <div class="dec qtybutton">-<i class="ion ion-ios-arrow-down"></i></div>
-                              </div>
-                          </td>
-                          <td>
-                              <span class="total-price">ج.م 75.00</span>
-                          </td>
-                      </tr>
+            <!-- Cart Products -->
+            <div class="cart-table table-responsive">
+                <table class="table table-bordered table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th class="cart-column-productname" scope="col">صورة المنتج</th>
+                            <th class="cart-column-quantity" scope="col">الإسم</th>
+                            <th class="cart-column-productname" scope="col">الكمية</th>
+                            <th class="cart-column-total" scope="col">سعر الشراء</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let x of orderDetails.OrderDetails">
 
-                      <tr>
-                          <td>
-                              <a href="product-details.html" class="product-image">
-                                  <img src="assets/images/products/product2.jpg" alt="product image">
-                              </a>
-                          </td>
-                          <td>
-                              <a href="product-details-right-sidebar.html" class="product-title">هواوي ميت10
-                                  لايت,شريحتين اتصال,تخزين حتي 64,رامات4,كاميراامامية16+2</a>
-                          </td>
-                          <td>ج.م 75.00</td>
-                          <td>
-                              <div class="quantity-select">
-                                  <input type="text" value="1">
-                                  <div class="inc qtybutton">+<i class="ion ion-ios-arrow-up"></i></div>
-                                  <div class="dec qtybutton">-<i class="ion ion-ios-arrow-down"></i></div>
-                              </div>
-                          </td>
-                          <td>
-                              <span class="total-price">ج.م 75.00</span>
-                          </td>
+                            <td>
+                                <a class="product-image">
+                                    <img (click)="navigateToOrderDetailsPage(x.productID)" [src]="x.image.imageUrl" alt="product image">
+                                </a>
+                            </td>
+                            <td>
+                                <a (click)="navigateToOrderDetailsPage(x.productID)" class="product-title">{{x.name}}</a>
+                            </td>
 
-                      </tr>
+                            <td>
+                                <div class="quantity-select">
+                                    <span>{{x.NumberOfItems}}</span>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="total-price">{{x.buyingPrice}} ج.م</span>
+                            </td>
 
-                  </tbody>
-              </table>
-          </div>
-          <!--// Cart Products -->
+                        </tr>
 
-          <!-- Cart Content -->
-          <div class="cart-content">
-              <div class="row justify-content-between">
-                  <div class="col-lg-4 col-md-6 col-12">
-                      <div class="cart-content-right">
-                          <h2>إجمالي الطلب</h2>
-                          <table class="cart-pricing-table">
-                              <tbody>
-                                  <tr class="cart-subtotal">
-                                      <th>إجمالي المنتجات</th>
-                                      <td>ج.م 715.00</td>
-                                  </tr>
-                                  <tr class="cart-shipping">
-                                      <th>التوصيل</th>
-                                      <td>ج.م 0.00</td>
-                                  </tr>
-                                  <tr class="cart-total">
-                                      <th>الإجمالي</th>
-                                      <td>ج.م 722.00</td>
-                                  </tr>
-                              </tbody>
-                          </table>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <!--// Cart Content -->
+                    </tbody>
+                </table>
+            </div>
+            <!--// Cart Products -->
 
-      </div>
-  </div>
-  <!--// Shopping Cart Area -->
-  </main>
+            <!-- Cart Content -->
+            <div class="cart-content">
+                <div class="row justify-content-between">
+                    <div class="col-lg-4 col-md-6 col-12">
+                        <div class="cart-content-right">
+                            <h2>إجمالي الطلب</h2>
+                            <table class="cart-pricing-table">
+                                <tbody>
+                                    <tr class="cart-subtotal">
+                                        <th>إجمالي المنتجات</th>
+                                        <td>{{orderDetails.total}} ج.م</td>
+                                    </tr>
+                                    <tr class="cart-shipping">
+                                        <th>التوصيل</th>
+                                        <td>{{orderDetails.shippingAmount}} ج.م</td>
+                                    </tr>
+                                    <tr class="cart-total">
+                                        <th>الإجمالي</th>
+                                        <td>{{orderDetails.total + orderDetails.shippingAmount}} ج.م</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+
+        </div>
+    </div>
+
+</main>

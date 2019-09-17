@@ -8,29 +8,42 @@
                 <div class="col-lg-3">
                     <ul class="nav myaccount-tab-trigger" id="account-page-tab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link" id="account-orders-tab" data-toggle="tab" href="#account-orders"
-                                role="tab" aria-controls="account-orders" aria-selected="false">طلباتي</a>
+                            <a [className]="(tabID == 1) ? 'nav-link active' : 'nav-link' " id="account-orders-tab"
+                                data-toggle="tab" href="#account-orders" role="tab" aria-controls="account-orders"
+                                [attr.aria-selected]="(tabID == 1) ? 'true' : 'false' ">طلباتي</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="account-address-tab" data-toggle="tab" href="#account-address"
-                                role="tab" aria-controls="account-address" aria-selected="false">العناوين</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="account-details-tab" data-toggle="tab" href="#account-details"
-                                role="tab" aria-controls="account-details" aria-selected="false">تعديل بيانات الحساب
+                            <a [className]="(tabID == 2) ? 'nav-link active' : 'nav-link' " id="account-details-tab"
+                                data-toggle="tab" href="#account-details" role="tab" aria-controls="account-details"
+                                [attr.aria-selected]="(tabID == 2) ? 'true' : 'false' ">تعديل بيانات الحساب
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a [className]="(tabID == 3) ? 'nav-link active' : 'nav-link' " id="favourites-tab"
+                                data-toggle="tab" href="#favourites" role="tab" aria-controls="favourites"
+                                [attr.aria-selected]="(tabID == 3) ? 'true' : 'false' ">المفضلة
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
 
                 <div class="col-lg-9">
                     <div class="tab-content myaccount-tab-content" id="account-page-tab-content">
-                        <div class="tab-pane fade show active" id="account-orders" role="tabpanel"
-                            aria-labelledby="account-orders-tab">
+
+                        <div [className]="(tabID == 1)? 'tab-pane fade active show' : 'tab-pane fade' "
+                            id="account-orders" role="tabpanel" aria-labelledby="account-orders-tab">
                             <div class="myaccount-orders">
                                 <h4 class="small-title">طلباتي</h4>
+
+                                <div class="row" *ngIf="myOrders.length == 0">
+                                    <div class="col-lg-12" style="text-align: center">
+                                        <h2>لا توجد طلبات</h2>
+                                    </div>
+                                </div>
+
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-hover">
+                                    <table class="table table-bordered table-hover" *ngIf="myOrders.length > 0">
                                         <tbody>
                                             <tr>
                                                 <th>رقم الطلب</th>
@@ -39,28 +52,13 @@
                                                 <th>الإجمالي</th>
                                                 <th></th>
                                             </tr>
-                                            <tr>
-                                                <td><a class="account-order-id" href="#">#5364</a></td>
-                                                <td>22 أغسطس 2018</td>
-                                                <td>قيد الوصول</td>
-                                                <td>162 ج.م</td>
-                                                <td><a href="#" class="ho-button ho-button-sm"><span>عرض</span></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><a class="account-order-id" href="#">#5364</a></td>
-                                                <td>22 أغسطس 2018</td>
-                                                <td>قيد الوصول</td>
-                                                <td>162 ج.م</td>
-                                                <td><a href="#" class="ho-button ho-button-sm"><span>عرض</span></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><a class="account-order-id" href="#">#5364</a></td>
-                                                <td>22 أغسطس 2018</td>
-                                                <td>قيد الوصول</td>
-                                                <td>162 ج.م</td>
-                                                <td><a href="#" class="ho-button ho-button-sm"><span>عرض</span></a>
+                                            <tr *ngFor="let item of myOrders">
+                                                <td style="font-weight: bold">{{item.ID}}</td>
+                                                <td>{{item.date}}</td>
+                                                <td>{{(item.status == 'True')?'تم الوصول':'قيد الوصول'}}</td>
+                                                <td>{{item.total}} ج.م</td>
+                                                <td><a class="ho-button ho-button-sm"
+                                                        (click)="navigateToOrderDetails(item.ID)"><span>عرض</span></a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -68,60 +66,128 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="account-address" role="tabpanel"
-                            aria-labelledby="account-address-tab">
-                            <div class="myaccount-address">
-                                <div class="row">
 
-                                    <div class="col">
-                                        <h4 class="small-title">عنوان الشحن</h4>
-                                        <address>
-                                            2 ش خطاب النجاري و المهندسين
-                                        </address>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="account-details" role="tabpanel"
-                            aria-labelledby="account-details-tab">
+                        <div [className]="(tabID == 2)? 'tab-pane fade active show' : 'tab-pane fade' "
+                            id="account-details" role="tabpanel" aria-labelledby="account-details-tab">
                             <div class="myaccount-details">
-                                <form action="#" class="ho-form">
+                                <form class="ho-form" #accountEditForm="ngForm">
                                     <div class="ho-form-inner">
-                                        <div class="single-input single-input-half">
-                                            <label for="account-details-firstname">الإسم *</label>
-                                            <input type="text" id="account-details-firstname">
-                                        </div>
+
                                         <div class="single-input">
-                                            <label for="account-details-email">الإيميل</label>
-                                            <input type="email" id="account-details-email">
+                                            <label for="NameUser">الإسم<span class="span-star">*</span></label>
+                                            <input type="text" name="NameUser" id="NameUser"
+                                                [(ngModel)]="userData.userName" #NameUserControl="ngModel" required>
+
+                                            <div class="invalid-feedback"
+                                                *ngIf="NameUserControl.errors?.required && (NameUserControl.dirty || saveForm == true)">
+                                                يجب إدخال هذا الحقل
+                                            </div>
+                                        </div>
+
+
+                                        <div class="single-input">
+                                            <label for="EmailUser">الإيميل<span class="span-star">*</span></label>
+                                            <input type="text" name="EmailUser" id="EmailUser"
+                                                [(ngModel)]="userData.email" #EmailUserControl="ngModel" required email>
+
+                                            <div class="invalid-feedback"
+                                                *ngIf="EmailUserControl.errors?.required && (EmailUserControl.dirty || saveForm == true)">
+                                                يجب إدخال هذا الحقل
+                                            </div>
+
+                                            <div class="invalid-feedback"
+                                                *ngIf="EmailUserControl.errors?.email && (EmailUserControl.dirty || saveForm == true)">
+                                                يجب إدخال إيميل صحيح
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="single-input">
+                                            <label for="PhoneNumberUser">رقم الهاتف<span
+                                                    class="span-star">*</span></label>
+                                            <input type="text" name="PhoneNumberUser" id="PhoneNumberUser"
+                                                [(ngModel)]="userData.phoneNumber" #PhoneNumberUserControl="ngModel"
+                                                required>
+
+                                            <div class="invalid-feedback"
+                                                *ngIf="PhoneNumberUserControl.errors?.required && (PhoneNumberUserControl.dirty || saveForm == true)">
+                                                يجب إدخال هذا الحقل
+                                            </div>
                                         </div>
 
                                         <div class="single-input">
-                                            <label for="account-details-oldpass">عنوان الشحن *</label>
-                                            <textarea id="account-d"></textarea>
+                                            <label for="AddressUser">عنوان الشحن<span class="span-star">*</span></label>
+                                            <textarea type="text" name="AddressUser" id="AddressUser"
+                                                [(ngModel)]="userData.address" #AddressUserControl="ngModel"
+                                                required></textarea>
+
+                                            <div class="invalid-feedback"
+                                                *ngIf="AddressUserControl.errors?.required && (AddressUserControl.dirty || saveForm == true)">
+                                                يجب إدخال هذا الحقل
+                                            </div>
                                         </div>
 
                                         <div class="single-input">
-                                            <label for="account-details-oldpass">الباسورد الحالي *</label>
-                                            <input type="password" id="account-details-oldpass">
-                                        </div>
-
-                                        <div class="single-input">
-                                            <label for="account-details-newpass">الباسورد الجديد *</label>
-                                            <input type="password" id="account-details-newpass">
-                                        </div>
-                                        <div class="single-input">
-                                            <label for="account-details-confpass">تأكيد الباسورد الجديد</label>
-                                            <input type="password" id="account-details-confpass">
-                                        </div>
-                                        <div class="single-input">
-                                            <button class="ho-button ho-button-dark" type="submit"><span>حفظ
+                                            <button class="ho-button ho-button-dark" (click)="editUser()"><span>حفظ
                                                 </span></button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
+
+
+                        <div [className]="(tabID == 3)? 'tab-pane fade active show' : 'tab-pane fade' " id="favourites"
+                            role="tabpanel" aria-labelledby="favourites-tab">
+                            <div class="myaccount-orders">
+                                <h4 class="small-title">المفضلة</h4>
+
+                                <div class="row" *ngIf="myFavourites.length == 0">
+                                    <div class="col-lg-12" style="text-align: center">
+                                        <h2>لا توجد منتجات مفضلة</h2>
+                                    </div>
+                                </div>
+                                <div class="cart-table table-responsive" *ngIf="myFavourites.length > 0">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="cart-column-productname" scope="col">صورة المنتج</th>
+                                                <th class="cart-column-quantity" scope="col">الإسم</th>
+                                                <th class="cart-column-productname" scope="col">القسم</th>
+                                                <th class="cart-column-total" scope="col">السعر</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let x of myFavourites">
+
+                                                <td>
+                                                    <a class="product-image">
+                                                        <img (click)="navigateToProductDetailsPage(x.ID)"
+                                                            [src]="x.images[0].imageUrl" alt="product image">
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a (click)="navigateToProductDetailsPage(x.ID)"
+                                                        class="product-title">{{x.name}}</a>
+                                                </td>
+
+                                                <td>
+                                                    <div class="quantity-select">
+                                                        <span>{{x.parentCategoryName}}</span>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span class="total-price">{{x.priceAfter}} ج.م</span>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -129,3 +195,11 @@
     </div>
     <!--// Account Page Area -->
 </main>
+
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body" style="text-align: center">{{message}}</div>
+        </div>
+    </div>
+</div>

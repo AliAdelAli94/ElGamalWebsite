@@ -13,6 +13,7 @@ export class SharingDataService {
   public userData : BehaviorSubject<UserDTO>;
   public filterDTO = new ProductFilterDTO();
   public cardData : BehaviorSubject<CardDTO>;
+  public loggedIn : boolean = false;
   
 
   constructor(private cookieService: CookieService) {
@@ -20,6 +21,11 @@ export class SharingDataService {
       this.cookieService.put("userData",JSON.stringify(null)); 
     }
     this.userData = new BehaviorSubject(JSON.parse(this.cookieService.get("userData")));
+    if(JSON.parse(this.cookieService.get("userData"))){
+      if(JSON.parse(this.cookieService.get("userData")).ID){
+        this.loggedIn = true;
+      }
+    }
 
     if(window.localStorage.getItem("cardData") == undefined  || window.localStorage.getItem("cardData") == "null"){
       window.localStorage.setItem("cardData",JSON.stringify(new CardDTO())); 
@@ -29,6 +35,12 @@ export class SharingDataService {
   }
 
   setLoggedUserData(data: any) {
+    if(data != null){
+      this.loggedIn = true;
+    }
+    else{
+      this.loggedIn = false;
+    }
     this.cookieService.put("userData", JSON.stringify(data));
     this.userData.next(JSON.parse(this.cookieService.get("userData")));
   }

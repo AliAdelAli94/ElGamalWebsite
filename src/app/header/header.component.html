@@ -48,17 +48,17 @@
           <div class="col-lg-3 col-md-6 col-sm-6 order-2 order-lg-3">
             <div class="header-icons">
               <div class="header-account">
-                <button class="header-accountbox-trigger"><span class="lnr lnr-user"></span> حسابي
+                <button class="header-accountbox-trigger"><span class="lnr lnr-user"></span> {{(loggedInFlag == true)?userDto.userName:'حسابي'}}
                   <i class="ion ion-ios-arrow-down"></i></button>
                 <ul class="header-accountbox dropdown-list">
                   <li *ngIf="loggedInFlag == true">
-                    <a [routerLink]="['/cart']">تعديل الحساب</a>
+                    <a (click) = "navigateToMyaccountPage(2)">تعديل الحساب</a>
                   </li>
                   <li *ngIf="loggedInFlag == true">
-                    <a [routerLink]="['/product-details']">المفضلة</a>
+                    <a (click) = "navigateToMyaccountPage(3)">المفضلة</a>
                   </li>
                   <li *ngIf="loggedInFlag == true">
-                    <a [routerLink]="['/search-result']">طلباتي</a>
+                    <a (click) = "navigateToMyaccountPage(1)">طلباتي</a>
                   </li>
                   <li *ngIf="loggedInFlag == false">
                     <a [routerLink]="['/login-register']">تسجيل الدخول</a>

@@ -4,9 +4,9 @@ import { FilteredProductsDTO } from '../models/FilteredProductsDTO.model';
 import { DbManipulationService } from '../services/db-manipulation.service';
 import { CardDTO } from '../models/CardDTO.model';
 import { ProductDTO } from '../models/ProductDTO.model';
-import { ImageDTO } from '../models/ImageDTO.model';
 import { SpinnerServieService } from '../services/spinner-servie.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UserDTO } from '../models/UserDTO.model';
 
 declare function IntializeWebsiteJS(): any;
 declare function IntializeRangeSlider(): any;
@@ -20,10 +20,15 @@ declare var $: any;
 export class SearchProductsResultComponent implements AfterViewInit, OnInit {
 
   filteredData: FilteredProductsDTO = new FilteredProductsDTO();
+  favouriteMessage : string;
+  userDto : UserDTO;
 
   constructor(private dbManipulationService: DbManipulationService,
     public sharingDataService: SharingDataService, private spinnerService: SpinnerServieService,
-    private _routeParams: ActivatedRoute) { }
+    private _routeParams: ActivatedRoute) {
+
+      this.userDto = new UserDTO();
+     }
 
   ngAfterViewInit() {
     IntializeWebsiteJS();
@@ -35,6 +40,7 @@ export class SearchProductsResultComponent implements AfterViewInit, OnInit {
       this.sharingDataService.filterDTO.CategoryID = categoryID;
     }
     this.getFilteredProducts();
+    this.getLoggedInUser();
   }
 
   search() {
@@ -84,6 +90,13 @@ export class SearchProductsResultComponent implements AfterViewInit, OnInit {
 
   }
 
+  getLoggedInUser() {
+    this.sharingDataService.userData.subscribe(response => {
+      this.userDto = response;
+    });
+  };
+
+
   changeSortingType(event: any, val: number) {
 
     this.sharingDataService.filterDTO.SortingType = val;
@@ -127,6 +140,22 @@ export class SearchProductsResultComponent implements AfterViewInit, OnInit {
     $('#confirmAddNewItemModal').modal('show');
 
 
+  }
+
+  addProductToFavourite(productID : string){
+    debugger;
+    this.spinnerService.showSpinner();
+    this.dbManipulationService.MakeProductFavourite(productID,this.userDto.ID).subscribe(response => {
+    if(response == 0){
+      this.favouriteMessage = "لقد تم إضافة منتج جديد إلي المفضلة";
+    }
+    if(response == 2){
+      this.favouriteMessage = "هذا المنتج مضاف من قبل إلي المفضلة";
+    }
+    $('#confirmAddFavouriteItemModal').modal('show');
+    },()=>{},()=>{
+    this.spinnerService.hideSpinner();
+    }); 
   }
 
 }

@@ -100,6 +100,8 @@ export class HeaderComponent implements OnInit {
     this.sharingDataService.setLoggedUserData(null);
     this.sharingDataService.setCardData(new CardDTO());
     this.loggedInFlag = false;
+    this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/home']));
   };
 
   search() {
@@ -113,6 +115,11 @@ export class HeaderComponent implements OnInit {
 
     this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
       this.router.navigate(['/search-result']));
+  };
+
+  navigateToMyaccountPage(id:number) {
+    this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/my-account',id]));
   };
 
 }

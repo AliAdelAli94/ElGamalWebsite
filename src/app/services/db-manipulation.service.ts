@@ -11,6 +11,9 @@ import { FilteredProductsDTO } from '../models/FilteredProductsDTO.model';
 import { OrderDTO } from '../models/OrderDTO.model';
 import { ProductDTO } from '../models/ProductDTO.model';
 import { CommentDTO } from '../models/CommentDTO.model';
+import { UserDTO } from '../models/UserDTO.model';
+import { GetOrderDTO } from '../models/GetOrderDTO.model';
+import { OrderDetailsDTO } from '../models/OrderDetailsDTO.model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +41,14 @@ export class DbManipulationService {
     });
   }
 
+  GetOrdersToUser(userID : string): Observable<GetOrderDTO[]> {
+    return this.httpClient.get<GetOrderDTO[]>(AppSettings.webApiUrl + "order/GetOrdersToUser?id="+userID);
+  }
+
+  GetOrderDetailsByID(id : string): Observable<OrderDetailsDTO> {
+    return this.httpClient.get<OrderDetailsDTO>(AppSettings.webApiUrl + "order/GetOrderDetailsByID?id="+id);
+  }
+
   GetFilteredProducts(item: ProductFilterDTO): Observable<FilteredProductsDTO> {
 
     return this.httpClient.post<FilteredProductsDTO>(AppSettings.webApiUrl + "Product/GetFilteredProducts", item, {
@@ -56,6 +67,15 @@ export class DbManipulationService {
     });
   }
 
+  MakeProductFavourite(productID : string , userID : string): Observable<any> {
+
+    return this.httpClient.post(AppSettings.webApiUrl + "Product/MakeProductFavourite?productID="+productID+"&&userID=" + userID, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
   
   makeOrder(item: OrderDTO): Observable<any> {
 
@@ -65,7 +85,7 @@ export class DbManipulationService {
       })
     });
   }
-
+  
   AddComment(item: CommentDTO): Observable<any> {
 
     return this.httpClient.post(AppSettings.webApiUrl + "Product/AddComment", item, {
@@ -73,6 +93,19 @@ export class DbManipulationService {
         'Content-Type': 'application/json'
       })
     });
+  }
+
+  EditUser(item: UserDTO): Observable<any> {
+
+    return this.httpClient.post(AppSettings.webApiUrl + "User/EditUser", item, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  GetAllFavourites(userID : string): Observable<ProductDTO[]> {
+    return this.httpClient.get<ProductDTO[]>(AppSettings.webApiUrl + "Product/GetAllFavourites?userID="+userID);
   }
 
 }

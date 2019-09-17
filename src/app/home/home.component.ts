@@ -4,6 +4,7 @@ import { ProductDTO } from '../models/ProductDTO.model';
 import { SpinnerServieService } from '../services/spinner-servie.service';
 import { SharingDataService } from '../services/sharing-data.service';
 import { CardDTO } from '../models/CardDTO.model';
+import { UserDTO } from '../models/UserDTO.model';
 
 declare function IntializeWebsiteJS(): any;
 declare function OfferSliderJS(): any;
@@ -17,11 +18,23 @@ declare var $ : any;
 export class HomeComponent implements AfterViewInit {
 
   offers: ProductDTO[];
+  userDto : UserDTO;
+  favouriteMessage : string;
+
   constructor(private dbManipulationService: DbManipulationService,
-    private spinnerService : SpinnerServieService,private sharingDataService : SharingDataService) { }
+    private spinnerService : SpinnerServieService,private sharingDataService : SharingDataService) { 
+
+      this.userDto = new UserDTO();
+    }
 
   ngOnInit() {
-    this.getProductOfferDTO();  
+    setTimeout(() => 
+    {
+      IntializeWebsiteJS();
+    }, 200);
+    
+    this.getProductOfferDTO();
+    this.getLoggedInUser();  
   }
   getProductOfferDTO() 
   {
@@ -40,11 +53,16 @@ export class HomeComponent implements AfterViewInit {
   }
   ngAfterViewInit() 
   {
-    setTimeout(() => 
-      {
-        IntializeWebsiteJS();
-      }, 200);
+   
   }
+
+  
+
+  getLoggedInUser() {
+    this.sharingDataService.userData.subscribe(response => {
+      this.userDto = response;
+    });
+  };
 
   
   AddToCart(productID: string) {
@@ -76,6 +94,22 @@ export class HomeComponent implements AfterViewInit {
     $('#confirmAddNewItemModal').modal('show');
 
 
+  }
+
+  addProductToFavourite(productID : string){
+    debugger;
+    this.spinnerService.showSpinner();
+    this.dbManipulationService.MakeProductFavourite(productID,this.userDto.ID).subscribe(response => {
+    if(response == 0){
+      this.favouriteMessage = "لقد تم إضافة منتج جديد إلي المفضلة";
+    }
+    if(response == 2){
+      this.favouriteMessage = "هذا المنتج مضاف من قبل إلي المفضلة";
+    }
+    $('#confirmAddFavouriteItemModal').modal('show');
+    },()=>{},()=>{
+    this.spinnerService.hideSpinner();
+    }); 
   }
 
 }
