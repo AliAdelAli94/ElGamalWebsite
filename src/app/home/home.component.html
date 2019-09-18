@@ -110,11 +110,11 @@
               <div class="hoproduct-rattingbox">
                 <h6>تقييم {{x.rate}} </h6>
                 <div class="rattingbox">
-                  <span class="active"><i class="ion ion-ios-star"></i></span>
-                  <span class="active"><i class="ion ion-ios-star"></i></span>
-                  <span class="active"><i class="ion ion-ios-star"></i></span>
-                  <span class="active"><i class="ion ion-ios-star"></i></span>
-                  <span class="active"><i class="ion ion-ios-star"></i></span>
+                    <span [ngClass]="{'active': x.rate >= 1 }"><i class="ion ion-ios-star"></i></span>
+                    <span [ngClass]="{'active': x.rate >= 2 }"><i class="ion ion-ios-star"></i></span>
+                    <span [ngClass]="{'active': x.rate >= 3 }"><i class="ion ion-ios-star"></i></span>
+                    <span [ngClass]="{'active': x.rate >= 4 }"><i class="ion ion-ios-star"></i></span>
+                    <span [ngClass]="{'active': x.rate >= 5 }"><i class="ion ion-ios-star"></i></span>
                 </div>
               </div>
               <div class="hoproduct-pricebox">

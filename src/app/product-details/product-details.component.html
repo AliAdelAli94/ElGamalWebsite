@@ -9,14 +9,13 @@
           <div class="col-lg-6">
             <div class="pdetails-images">
               <div class="pdetails-largeimages pdetails-imagezoom">
-                <div class="pdetails-singleimage" [attr.data-src]="x.imageUrl"
-                  *ngFor="let x of product.images">
+                <div class="pdetails-singleimage" [attr.data-src]="x.imageUrl" *ngFor="let x of item.CurrentProduct.images">
                   <img [src]="x.imageUrl" alt="product image">
                 </div>
               </div>
 
               <div class="pdetails-thumbs">
-                <div class="pdetails-singlethumb" *ngFor="let x of product.images">
+                <div class="pdetails-singlethumb" *ngFor="let x of item.CurrentProduct.images">
                   <img [src]="x.imageUrl" alt="product thumb">
                 </div>
 
@@ -27,36 +26,36 @@
             <div class="pdetails-content">
 
               <div class="rattingbox">
-                <span class="active" *ngIf="product.rate >= 1" ><i class="ion ion-ios-star"></i></span>
-                <span class="active" *ngIf="product.rate >= 2" ><i class="ion ion-ios-star"></i></span>
-                <span class="active" *ngIf="product.rate >= 3" ><i class="ion ion-ios-star"></i></span>
-                <span class="active" *ngIf="product.rate >= 4" ><i class="ion ion-ios-star"></i></span>
-                <span class="active" *ngIf="product.rate >= 5" ><i class="ion ion-ios-star"></i></span>
+                <span class="active" *ngIf="item.CurrentProduct.rate >= 1"><i class="ion ion-ios-star"></i></span>
+                <span class="active" *ngIf="item.CurrentProduct.rate >= 2"><i class="ion ion-ios-star"></i></span>
+                <span class="active" *ngIf="item.CurrentProduct.rate >= 3"><i class="ion ion-ios-star"></i></span>
+                <span class="active" *ngIf="item.CurrentProduct.rate >= 4"><i class="ion ion-ios-star"></i></span>
+                <span class="active" *ngIf="item.CurrentProduct.rate >= 5"><i class="ion ion-ios-star"></i></span>
               </div>
 
-              <h3>{{product.name}}</h3>
+              <h3>{{item.CurrentProduct.name}}</h3>
               <div class="pdetails-pricebox">
-                <del class="oldprice">ج.م {{product.priceBefore}} </del>
-                <span class="price">ج.م {{product.priceAfter}}</span>
-                <span class="badge">خصم {{product.discountPercentage}}</span>
+                <del class="oldprice">ج.م {{item.CurrentProduct.priceBefore}} </del>
+                <span class="price">ج.م {{item.CurrentProduct.priceAfter}}</span>
+                <span class="badge">خصم {{item.CurrentProduct.discountPercentage}}</span>
               </div>
-              <p>{{product.description}}</p>
+              <p>{{item.CurrentProduct.description}}</p>
 
               <div class="pdetails-categories">
                 <span>القسم :</span>
                 <ul>
-                  <li>{{product.parentCategoryName}}</li>
+                  <li>{{item.CurrentProduct.parentCategoryName}}</li>
                 </ul>
               </div>
 
               <div class="pdetails-quantity">
-                <button class="ho-button" (click)="AddToCart(product.ID)">
+                <button class="ho-button" (click)="AddToCart(item.CurrentProduct.ID)">
                   <i class="lnr lnr-cart"></i>&nbsp;
                   <span> أضف إلي العربة </span>
                 </button>
               </div>
-            
-              
+
+
             </div>
           </div>
         </div>
@@ -71,7 +70,8 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" id="product-details-area3-tab" data-toggle="tab" href="#product-details-area3"
-              role="tab" aria-controls="product-details-area3" aria-selected="false">التقييم ({{product.Comments.length}})</a>
+              role="tab" aria-controls="product-details-area3" aria-selected="false">التقييم
+              ({{item.CurrentProduct.Comments.length}})</a>
           </li>
         </ul>
 
@@ -79,9 +79,9 @@
           <div class="tab-pane fade show active" id="product-details-area1" role="tabpanel"
             aria-labelledby="product-details-area1-tab">
             <div class="pdetails-description">
-              <p>{{product.description}}</p>
+              <p>{{item.CurrentProduct.description}}</p>
               <ul>
-                <li *ngFor="let x of product.ProductOptions">{{x.optionText}}</li>
+                <li *ngFor="let x of item.CurrentProduct.ProductOptions">{{x.optionText}}</li>
               </ul>
             </div>
           </div>
@@ -90,10 +90,10 @@
             aria-labelledby="product-details-area3-tab">
             <div class="pdetails-reviews">
               <div class="product-review">
-                <div class="commentlist" *ngIf="product.Comments.length > 0" id="ReviewsAndComments" >
+                <div class="commentlist" *ngIf="item.CurrentProduct.Comments.length > 0" id="ReviewsAndComments">
                   <h5>التعليقات و التقيمات</h5>
 
-                  <div class="single-comment" *ngFor="let h of product.Comments">
+                  <div class="single-comment" *ngFor="let h of item.CurrentProduct.Comments">
                     <div class="single-comment-content">
                       <div class="single-comment-content-top">
                         <h6>بواسطة ... {{h.userName}}</h6>
@@ -155,22 +155,76 @@
     </div>
   </div>
   <!--// Product Details Area -->
-</main>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="confirmAddCommentModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-body" style="text-align: center">لقد تم إضافة تعليقك بنجاح</div>  
+
+  <div class="ho-section deal-of-the-day-area bg-white ptb-30" *ngIf="item.RelatedProducts">
+    <div class="container" *ngIf="item.RelatedProducts.length > 0">
+      <div class="section-title">
+        <h3>منتجات متعلقة</h3>
+      </div>
+      <div class="product-slider deal-of-the-day-slider-2 slider-navigation-2 slider-dots">
+
+        <!-- Single Product -->
+        <div class="product-slider-col" *ngFor="let x of item.RelatedProducts">
+          <article class="hoproduct hoproduct-2">
+            <div class="hoproduct-image">
+              <a class="hoproduct-thumb" (click)="navigateToProductDetails(x.ID)">
+                <img class="hoproduct-frontimage" [src]="x.images[0].imageUrl" alt="product image">
+                <img class="hoproduct-backimage" [src]="(x.images[1])?x.images[1].imageUrl:x.images[0].imageUrl"
+                  alt="product image">
+              </a>
+              <ul class="hoproduct-actionbox">
+                <li><a (click)="AddToCart(x.ID)"><i class="lnr lnr-cart"></i></a></li>
+                <li><a (click)="navigateToProductDetails(x.ID)" class="quickview-trigger"><i
+                      class="lnr lnr-eye"></i></a></li>
+                <li (click)="addProductToFavourite(x.ID)" *ngIf="sharingDataService.loggedIn == true"><a><i
+                      class="lnr lnr-heart"></i></a></li>
+              </ul>
+
+            </div>
+            <div class="hoproduct-content">
+              <h5 class="hoproduct-title"><a (click)="navigateToProductDetails(x.ID)">{{x.name}}</a></h5>
+              <div class="hoproduct-rattingbox">
+                <h6>تقييم {{x.rate}} </h6>
+                <div class="rattingbox">
+                    <span [ngClass]="{'active': x.rate >= 1 }"><i class="ion ion-ios-star"></i></span>
+                    <span [ngClass]="{'active': x.rate >= 2 }"><i class="ion ion-ios-star"></i></span>
+                    <span [ngClass]="{'active': x.rate >= 3 }"><i class="ion ion-ios-star"></i></span>
+                    <span [ngClass]="{'active': x.rate >= 4 }"><i class="ion ion-ios-star"></i></span>
+                    <span [ngClass]="{'active': x.rate >= 5 }"><i class="ion ion-ios-star"></i></span>
+                </div>
+              </div>
+              <div class="hoproduct-pricebox">
+                <div class="pricebox">
+                  <del class="oldprice">ج.م {{x.priceBefore}}</del>
+                  <span class="price">ج.م {{x.priceAfter}}</span>
+                </div>
+                <span class="discount">{{x.discountPercentage}}</span>
+              </div>
+            </div>
+          </article>
+        </div>
+        <!--// Single Product -->
+
       </div>
     </div>
   </div>
 
-   <!-- Modal -->
- <div class="modal fade" id="confirmAddNewItemModal" tabindex="-1" role="dialog" aria-hidden="true">
+</main>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmAddCommentModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-body" style="text-align: center">لقد تم إضافة منتج جديد إلي العربة</div>  
+      <div class="modal-body" style="text-align: center">لقد تم إضافة تعليقك بنجاح</div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmAddNewItemModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body" style="text-align: center">لقد تم إضافة منتج جديد إلي العربة</div>
     </div>
   </div>
 </div>

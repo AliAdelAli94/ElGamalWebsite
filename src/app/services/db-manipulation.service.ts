@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AppSettings } from '../AppSettings';
 import { ParentCategoryDto } from '../models/ParentCategoryDto.model';
-import { GetProductById } from '../models/GetProductById.model';
 import { LoginDTO } from '../models/LoginDTO.model';
 import { RegisterDTO } from '../models/RegisterDTO.model';
 import { ProductFilterDTO } from '../models/ProductFilterDTO.model';
@@ -14,6 +13,7 @@ import { CommentDTO } from '../models/CommentDTO.model';
 import { UserDTO } from '../models/UserDTO.model';
 import { GetOrderDTO } from '../models/GetOrderDTO.model';
 import { OrderDetailsDTO } from '../models/OrderDetailsDTO.model';
+import { ProductDetailsDTO } from '../models/ProductDetailsDTO.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +28,8 @@ export class DbManipulationService {
   getProductOfferDTO(): Observable<ProductDTO[]> {
     return this.httpClient.get<ProductDTO[]>(AppSettings.webApiUrl + "Product/GetAllOffers");
   }
-  getGetProductById(item: string): Observable<GetProductById> {
-    return this.httpClient.get<GetProductById>(AppSettings.webApiUrl + "Product/GetProductById/" + item);
+  getGetProductById(item: string): Observable<ProductDetailsDTO> {
+    return this.httpClient.get<ProductDetailsDTO>(AppSettings.webApiUrl + "Product/GetProductById/" + item);
   }
 
   login(item: LoginDTO): Observable<any> {

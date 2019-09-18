@@ -1,7 +1,6 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DbManipulationService } from '../services/db-manipulation.service';
-import { GetProductById } from '../models/GetProductById.model';
 import { CommentDTO } from '../models/CommentDTO.model';
 import { CookieService } from 'ngx-cookie';
 import { NgForm } from '@angular/forms';
@@ -9,10 +8,11 @@ import { SpinnerServieService } from '../services/spinner-servie.service';
 import { SharingDataService } from '../services/sharing-data.service';
 import { CardDTO } from '../models/CardDTO.model';
 import { ProductDTO } from '../models/ProductDTO.model';
-import { parse } from 'path';
+import { ProductDetailsDTO } from '../models/ProductDetailsDTO.model';
 
 
 declare function IntializeWebsiteJS(): any;
+declare function OfferSliderJS(): any;
 declare var $: any;
 
 @Component({
@@ -21,7 +21,7 @@ declare var $: any;
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements AfterViewInit {
-  product: GetProductById = new GetProductById();
+  item: ProductDetailsDTO = new ProductDetailsDTO();
   public CommentDto: CommentDTO = new CommentDTO();
   public saveForm: boolean = false;
   public userLoggedIn: boolean = false;
@@ -44,15 +44,16 @@ export class ProductDetailsComponent implements AfterViewInit {
       this.userLoggedIn = false;
     }
 
-    this.getproductbyid();
-  }
-  getproductbyid() {
     let empcode: string = this._activatedRoute.snapshot.params['code'];
-    this.dbManipulationService.getGetProductById(empcode).subscribe(response => {
-      this.product = response;
+    this.getproductbyid(empcode);
+  }
+  getproductbyid(id : string) {
+    this.dbManipulationService.getGetProductById(id).subscribe(response => {
+      this.item = response;
 
       setTimeout(() => {
         IntializeWebsiteJS();
+        OfferSliderJS();
       }, 100);
 
     });
@@ -68,7 +69,7 @@ export class ProductDetailsComponent implements AfterViewInit {
       this.spinnerServieService.showSpinner();
       this.dbManipulationService.AddComment(this.CommentDto).subscribe(response => {
         if (response == 0) {
-          this.product.Comments.push(JSON.parse(JSON.stringify(this.CommentDto)));
+          this.item.CurrentProduct.Comments.push(JSON.parse(JSON.stringify(this.CommentDto)));
           $('#confirmAddCommentModal').modal('show');
           this.AddCommentForm.reset();
         }
@@ -78,6 +79,12 @@ export class ProductDetailsComponent implements AfterViewInit {
     }
 
   }
+
+  
+  navigateToProductDetails(id:string) {
+    this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: false }).then(() =>
+      this.router.navigate(['/product-details',id]));
+  };
 
 
   AddToCart(productID: string) {
@@ -90,23 +97,8 @@ export class ProductDetailsComponent implements AfterViewInit {
       existedProduct[0].NumberOfItems = existedProduct[0].NumberOfItems + 1;
     }
     else {
-      
-      let selectedProduct: ProductDTO = new ProductDTO();
-      selectedProduct.ID = this.product.ID;
-      selectedProduct.ProductOptions = this.product.ProductOptions;
-      selectedProduct.categoryID = this.product.categoryID;
-      selectedProduct.NumberOfItems = 1;
-      selectedProduct.description = this.product.description;
-      selectedProduct.discountPercentage = this.product.discountPercentage;
-      selectedProduct.images = this.product.images;
-      selectedProduct.name = this.product.name;
-      selectedProduct.parentCategoryName = this.product.parentCategoryName;
-      selectedProduct.priceAfter = parseFloat(this.product.priceAfter);
-      selectedProduct.priceBefore = parseFloat(this.product.priceBefore);
-      selectedProduct.rate = this.product.rate;
-
-      cardData.selectedProducts.push(selectedProduct);
-
+      this.item.CurrentProduct.NumberOfItems = 1;
+      cardData.selectedProducts.push(this.item.CurrentProduct);
     }
 
     cardData.productsPrice = 0;
