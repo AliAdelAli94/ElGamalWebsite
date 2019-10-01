@@ -1,5 +1,4 @@
 import { ImageDTO } from './ImageDTO.model';
-import { ProductOptionDTO } from './ProductOptionDTO.model';
 import { CommentDTO } from './CommentDTO.model';
 
 export class ProductDTO {
@@ -25,7 +24,7 @@ export class ProductDTO {
 
     images: ImageDTO[] = new Array();
 
-    ProductOptions?: ProductOptionDTO[] = new Array();
+    productOptions : string;
 
     Comments?: CommentDTO[] = new Array();
 
