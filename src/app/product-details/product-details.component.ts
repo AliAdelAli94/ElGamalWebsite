@@ -9,6 +9,7 @@ import { SharingDataService } from '../services/sharing-data.service';
 import { CardDTO } from '../models/CardDTO.model';
 import { ProductDTO } from '../models/ProductDTO.model';
 import { ProductDetailsDTO } from '../models/ProductDetailsDTO.model';
+import { Meta } from '@angular/platform-browser';
 
 
 declare function IntializeWebsiteJS(): any;
@@ -31,7 +32,8 @@ export class ProductDetailsComponent implements AfterViewInit {
 
   constructor(private dbManipulationService: DbManipulationService,
     private _activatedRoute: ActivatedRoute, private cookieService: CookieService,
-    private spinnerServieService: SpinnerServieService, private router: Router, private sharingDataService: SharingDataService) { }
+    private spinnerServieService: SpinnerServieService, private router: Router,
+     private sharingDataService: SharingDataService,private meta : Meta) { }
 
   ngOnInit() {
     let userData = JSON.parse(this.cookieService.get("userData"));
@@ -54,6 +56,7 @@ export class ProductDetailsComponent implements AfterViewInit {
       setTimeout(() => {
         IntializeWebsiteJS();
         OfferSliderJS();
+        this.AddFacebookMetaTags();
       }, 100);
 
     });
@@ -114,6 +117,16 @@ export class ProductDetailsComponent implements AfterViewInit {
     $('#confirmAddNewItemModal').modal('show');
 
 
+  }
+
+  AddFacebookMetaTags(){
+    this.meta.addTag({property:'og:title',content:this.item.CurrentProduct.name});
+    this.meta.addTag({property:'og:description',content:this.item.CurrentProduct.description});
+    this.meta.addTag({property:'og:url',content:"http://elgamal.shop/product-details/"+this.item.CurrentProduct.ID});
+    this.meta.addTag({property:'og:image',content:"/assets/images/logo/logo.png"});
+    this.meta.addTag({property:'og:image:alt',content:"Logo image"});
+    this.meta.addTag({property:'og:image:height',content:"200"});
+    this.meta.addTag({property:'og:image:width',content:"200"});
   }
 
 }
