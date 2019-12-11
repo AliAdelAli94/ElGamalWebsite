@@ -85,7 +85,7 @@ export class LoginAndRegisterComponent implements AfterViewInit {
         else {
           this.incorrectUsernameOrPasswordFlag = false;
           this.sharingDataService.setLoggedUserData(response);
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/default.aspx/home');
         }
       },()=>{ },()=>{
        this.spinnerServieService.hideSpinner();

@@ -16,20 +16,21 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { HowWeAreComponent } from './how-we-are/how-we-are.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'product-details/:code', component: ProductDetailsComponent },
-  {path:'cart',component:CartComponent},
-  {path:'login-register',component:LoginAndRegisterComponent},
-  {path:'checkout',component:CheckoutComponent,canActivate: [AuthGuard]},
-  {path:'my-account/:tabID',component:MyAccountComponent},
-  {path:'order-details/:id',component:OrderDetailsComponent},
-  {path:'search-result',component:SearchProductsResultComponent},
-  {path:'search-result/:categoryID',component:SearchProductsResultComponent},
-  {path:'confirm-order',component:ConfirmOrderComponent},
-  {path:'About-Us',component:AboutUsComponent},
-  {path:'How-We-Are',component:HowWeAreComponent},
-  {path:'**',component:notfound}
+  {path: 'default.aspx', component: HomeComponent },
+  {path: 'default.aspx/home', component: HomeComponent },
+  {path: '', redirectTo: 'default.aspx/home', pathMatch: 'full' },
+  {path: 'default.aspx/product-details/:code', component: ProductDetailsComponent },
+  {path: 'default.aspx/cart',component:CartComponent},
+  {path: 'default.aspx/login-register',component:LoginAndRegisterComponent},
+  {path: 'default.aspx/checkout',component:CheckoutComponent,canActivate: [AuthGuard]},
+  {path: 'default.aspx/my-account/:tabID',component:MyAccountComponent},
+  {path: 'default.aspx/order-details/:id',component:OrderDetailsComponent},
+  {path: 'default.aspx/search-result',component:SearchProductsResultComponent},
+  {path: 'default.aspx/search-result/:categoryID',component:SearchProductsResultComponent},
+  {path: 'default.aspx/confirm-order',component:ConfirmOrderComponent},
+  {path: 'default.aspx/About-Us',component:AboutUsComponent},
+  {path: 'default.aspx/How-We-Are',component:HowWeAreComponent},
+  {path: '**',component:notfound}
 ];
 
 @NgModule({

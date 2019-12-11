@@ -22,8 +22,8 @@ export class FooterComponent implements OnInit {
 
 
   navigateToMyaccountPage(id:number) {
-    this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
-      this.router.navigate(['/my-account',id]));
+    this.router.navigateByUrl('/default.aspx/RefrshComponent', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/default.aspx/my-account',id]));
   };
 
 }

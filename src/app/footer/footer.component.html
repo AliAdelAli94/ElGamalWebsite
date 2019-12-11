@@ -33,7 +33,7 @@
                 <a (click)="navigateToMyaccountPage(1)">طلباتي</a>
               </li>
               <li *ngIf="loggedInFlag == false">
-                <a [routerLink]="['/login-register']">تسجيل الدخول</a>
+                <a [routerLink]="['/default.aspx/login-register']">تسجيل الدخول</a>
               </li>
               <li>
                 <a (click)="logout()" style="cursor:pointer">تسجيل الخروج</a>
@@ -47,11 +47,11 @@
             <h5 class="footer-widget-title">للتواصل معنا</h5>
             <ul>
               <li>
-                <a [routerLink]="['/How-We-Are']">من نحن</a>
+                <a [routerLink]="['/default.aspx/How-We-Are']">من نحن</a>
               </li>
 
               <li>
-                <a [routerLink]="['/About-Us']"> اتصل بنا</a>
+                <a [routerLink]="['/default.aspx/About-Us']"> اتصل بنا</a>
               </li>
             </ul>
           </div>

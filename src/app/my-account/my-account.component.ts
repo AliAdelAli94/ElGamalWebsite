@@ -103,8 +103,8 @@ export class MyAccountComponent implements AfterViewInit, OnInit {
   }
 
   navigateToOrderDetails(orderID: string) {
-    this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
-      this.router.navigate(['/order-details',orderID]));
+    this.router.navigateByUrl('/default.aspx/RefrshComponent', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/default.aspx/order-details',orderID]));
   }
 
 
@@ -123,8 +123,8 @@ export class MyAccountComponent implements AfterViewInit, OnInit {
   }
 
   navigateToProductDetailsPage(productID : string){
-    this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
-    this.router.navigate(['/product-details',productID]));
+    this.router.navigateByUrl('/default.aspx/RefrshComponent', { skipLocationChange: true }).then(() =>
+    this.router.navigate(['/default.aspx/product-details',productID]));
   }
 
 

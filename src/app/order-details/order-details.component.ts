@@ -50,8 +50,8 @@ export class OrderDetailsComponent implements OnInit,AfterViewInit {
 
     navigateToOrderDetailsPage(id: string) {
 
-      this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
-        this.router.navigate(['/product-details', id]));
+      this.router.navigateByUrl('/default.aspx/RefrshComponent', { skipLocationChange: true }).then(() =>
+        this.router.navigate(['/default.aspx/product-details', id]));
     };
 }
 

@@ -69,7 +69,7 @@ export class HeaderComponent implements OnInit {
 
   navigateToCompleteOrder() {
     this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
-      this.router.navigate(['/checkout']));
+      this.router.navigate(['/default.aspx/checkout']));
   };
 
   navigateToSearchProductsPage(id: string) {
@@ -81,13 +81,13 @@ export class HeaderComponent implements OnInit {
     this.sharingDataService.filterDTO.PriceTO = null;
     this.sharingDataService.filterDTO.SortingType = null;
 
-    this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
-      this.router.navigate(['/search-result', id]));
+    this.router.navigateByUrl('/default.aspx/RefrshComponent', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/default.aspx/search-result', id]));
   };
 
   navigateToCartPage() {
-    this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
-      this.router.navigate(['/cart']));
+    this.router.navigateByUrl('/default.aspx/RefrshComponent', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/default.aspx/cart']));
 
 
     $('.header-carticon').removeClass('is-active');
@@ -100,8 +100,8 @@ export class HeaderComponent implements OnInit {
     this.sharingDataService.setLoggedUserData(null);
     this.sharingDataService.setCardData(new CardDTO());
     this.loggedInFlag = false;
-    this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
-      this.router.navigate(['/home']));
+    this.router.navigateByUrl('/default.aspx/RefrshComponent', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/default.aspx/home']));
   };
 
   search() {
@@ -113,13 +113,13 @@ export class HeaderComponent implements OnInit {
     this.sharingDataService.filterDTO.PriceTO = null;
     this.sharingDataService.filterDTO.SortingType = null;
 
-    this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
-      this.router.navigate(['/search-result']));
+    this.router.navigateByUrl('/default.aspx/RefrshComponent', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/default.aspx/search-result']));
   };
 
   navigateToMyaccountPage(id:number) {
-    this.router.navigateByUrl('/RefrshComponent', { skipLocationChange: true }).then(() =>
-      this.router.navigate(['/my-account',id]));
+    this.router.navigateByUrl('/default.aspx/RefrshComponent', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/default.aspx/my-account',id]));
   };
 
 }

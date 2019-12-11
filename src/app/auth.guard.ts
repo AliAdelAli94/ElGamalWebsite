@@ -17,7 +17,7 @@ export class AuthGuard implements  CanActivate {
     if(JSON.parse(this.cookieService.get("userData"))){
       return true;
     }else{
-      this.myRoute.navigateByUrl('/login-register');
+      this.myRoute.navigateByUrl('/default.aspx/login-register');
       return false;
     }
   }

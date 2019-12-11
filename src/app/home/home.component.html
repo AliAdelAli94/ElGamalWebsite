@@ -94,19 +94,19 @@
         <div class="product-slider-col" *ngFor="let x of offers">
           <article class="hoproduct hoproduct-2">
             <div class="hoproduct-image">
-              <a class="hoproduct-thumb" [routerLink]="['/product-details',x.ID]">
+              <a class="hoproduct-thumb" [routerLink]="['/default.aspx/product-details',x.ID]">
                 <img class="hoproduct-frontimage" [src]="x.images[0].imageUrl" alt="product image">
                 <img class="hoproduct-backimage" [src]="(x.images[1])?x.images[1].imageUrl:x.images[0].imageUrl" alt="product image">
               </a>
               <ul class="hoproduct-actionbox">
                 <li><a (click)="AddToCart(x.ID)"><i class="lnr lnr-cart"></i></a></li>
-                <li><a [routerLink]="['/product-details',x.ID]" class="quickview-trigger"><i class="lnr lnr-eye"></i></a></li>
+                <li><a [routerLink]="['/default.aspx/product-details',x.ID]" class="quickview-trigger"><i class="lnr lnr-eye"></i></a></li>
                 <li (click)="addProductToFavourite(x.ID)" *ngIf="sharingDataService.loggedIn == true"><a><i class="lnr lnr-heart"></i></a></li>
               </ul>
              
             </div>
             <div class="hoproduct-content">
-              <h5 class="hoproduct-title"><a [routerLink]="['/product-details',x.ID]">{{x.name}}</a></h5>
+              <h5 class="hoproduct-title"><a [routerLink]="['/default.aspx/product-details',x.ID]">{{x.name}}</a></h5>
               <div class="hoproduct-rattingbox">
                 <h6>تقييم {{x.rate}} </h6>
                 <div class="rattingbox">

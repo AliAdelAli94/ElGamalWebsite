@@ -14,7 +14,7 @@
               <button class="select-language-current"><img src="assets/images/icons/eg.png"
                   alt="us icon">العربية</button>
               <ul class="select-language-list dropdown-list">
-                <li><a [routerLink]="['/home']"><img src="assets/images/icons/eg.png" alt="eg icon">العربية</a></li>
+                <li><a [routerLink]="['/default.aspx/home']"><img src="assets/images/icons/eg.png" alt="eg icon">العربية</a></li>
               </ul>
             </div>
           </div>
@@ -62,7 +62,7 @@
                   <a (click)="navigateToMyaccountPage(1)">طلباتي</a>
                 </li>
                 <li *ngIf="loggedInFlag == false">
-                  <a [routerLink]="['/login-register']">تسجيل الدخول</a>
+                  <a [routerLink]="['/default.aspx/login-register']">تسجيل الدخول</a>
                 </li>
                 <li *ngIf="loggedInFlag == true">
                   <a (click)="logout()" style="cursor:pointer">تسجيل الخروج</a>
@@ -124,7 +124,7 @@
       <div class="row align-items-center">
         <div class="col-lg-10 col-md-5 col-sm-5">
 
-          <div class="col-lg-4 col-md-3 col-sm-3" style="float: right;">
+          <div class="col-lg-3 col-md-3 col-sm-3" style="float: right;">
             <!-- Category Menu -->
             <div class="header-catmenu catmenu">
               <button class="catmenu-trigger">
@@ -151,20 +151,20 @@
             </div>
             <!--// Category Menu -->
           </div>
-          <div class="col-lg-8 col-md-9 col-sm-9" style="text-align: center;float: right;">
+          <div class="col-lg-8 col-md-9 col-sm-9" style="float: right;">
             <!-- Navigation -->
             <nav class="ho-navigation ho-navigation-2">
               <ul>
                 <li class="active">
-                  <a [routerLink]="['/home']">الرئيسية</a>
+                  <a [routerLink]="['/default.aspx/home']">الرئيسية</a>
                 </li>
 
                 <li>
-                  <a [routerLink]="['/How-We-Are']">من نحن</a>
+                  <a [routerLink]="['/default.aspx/How-We-Are']">من نحن</a>
                 </li>
 
                 <li>
-                  <a [routerLink]="['/About-Us']"> اتصل بنا</a>
+                  <a [routerLink]="['/default.aspx/About-Us']"> اتصل بنا</a>
                 </li>
 
               </ul>

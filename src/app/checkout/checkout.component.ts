@@ -44,7 +44,7 @@ export class CheckoutComponent implements AfterViewInit {
         let result : MakeOrderResultDTO  = response;
         if(result.StatusCode == 0){
           this.sharingDataService.setCardData(new CardDTO());
-          this.router.navigateByUrl('/confirm-order');
+          this.router.navigateByUrl('/default.aspx/confirm-order');
         }
       },()=>{},()=>{
         this.spinnerService.hideSpinner();
